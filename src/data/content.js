@@ -1,57 +1,7 @@
-export const productsData = [
-  {
-    id: "spun-polyester-dyed-yarn",
-    name: "Spun Polyester Dyed Yarn",
-    image: "/images/products/spun-polyester-dyed-yarn.jpg",
-    shortDesc: "Premium dyed spun polyester yarn offering excellent color consistency, uniform strength, and smooth processing.",
-    longDesc: "Our Spun Polyester Dyed Yarn is manufactured from high-grade polyester staple fibers and dyed using state-of-the-art technology to ensure high colorfastness, minimal batch-to-batch variation, and superior performance during weaving and knitting. It is designed to withstand rigorous textile processes while maintaining its strength and vibrant color.",
-    applications: [
-      "Knitting & Weaving",
-      "Socks & Hosiery",
-      "Home Textiles & Upholstery",
-      "Narrow Fabrics & Labels"
-    ]
-  },
-  {
-    id: "spun-polyester-sewing-thread",
-    name: "Spun Polyester Sewing Thread",
-    image: "/images/products/spun-polyester-sewing-thread.jpg",
-    shortDesc: "High-tenacity sewing thread engineered for seamless performance in high-speed stitching applications.",
-    longDesc: "Engineered specifically for high-speed automated sewing machines, our Spun Polyester Sewing Thread features outstanding tensile strength, low friction coefficient, and excellent thermal resistance. It minimizes thread breakages and seam puckering, ensuring clean, durable, and high-quality stitches across a variety of fabrics.",
-    applications: [
-      "Ready-Made Garment Stitching",
-      "High-Speed Tailoring & Overlocking",
-      "Apparel & Denim Manufacturing",
-      "Footwear & Leather Goods Stitching"
-    ]
-  },
-  {
-    id: "spun-polyester-yarn",
-    name: "Spun Polyester Yarn",
-    image: "/images/products/spun-polyester-yarn.jpg",
-    shortDesc: "High-uniformity raw white spun polyester yarn ideal for dyeing, weaving, and knitting applications.",
-    longDesc: "Our Spun Polyester Yarn (Raw White) provides a reliable foundation for downstream textile processors. Made with premium polyester fibers, it boasts excellent hairiness control, high tensile strength, and minimal imperfections, allowing smooth running on modern high-speed looms and circular knitting machines.",
-    applications: [
-      "Downstream Yarn Dyeing",
-      "Circular and Warp Knitting",
-      "Woven Fabric Production",
-      "Industrial Sewing & Braiding"
-    ]
-  },
-  {
-    id: "polyester-sewing-threads",
-    name: "Polyester Sewing Threads",
-    image: "/images/products/polyester-sewing-thread.jpg",
-    shortDesc: "Versatile, multi-ply polyester threads designed for heavy-duty stitching, embroidery, and home furnishings.",
-    longDesc: "Our Polyester Sewing Threads are twisted and finished to meet strict industrial standards. Available in multiple plies (2-ply, 3-ply, etc.) and tickets, they provide the durability needed for heavy-duty applications, embroidery work, and home furnishings, retaining their strength and finish under harsh washing conditions.",
-    applications: [
-      "Heavy-Duty Industrial Stitching",
-      "Decorative Embroidery & Quilting",
-      "Home Furnishings & Curtains",
-      "Canvas, Tents & Outdoor Gear"
-    ]
-  }
-];
+import { productsData as allProductsData } from './products';
+
+export const productsData = allProductsData;
+
 
 export const manufacturingSteps = [
   {

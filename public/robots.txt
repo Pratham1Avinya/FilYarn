@@ -1,0 +1,13 @@
+# Robots.txt for FILYARN INDUSTRIES PRIVATE LIMITED
+# https://filyarn.com
+
+User-agent: *
+Allow: /
+Allow: /products
+Allow: /manufacturing
+Allow: /about
+Allow: /gallery
+Allow: /contact
+
+# Sitelink Map Index for Google and major search engines
+Sitemap: https://filyarn.com/sitemap.xml
