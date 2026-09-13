@@ -44,7 +44,7 @@ const MediaGallery = () => {
 
   return (
     <div style={{ backgroundColor: 'var(--bg-primary)' }}>
-      
+
       {/* Editorial Header */}
       <section className="section" style={{ borderBottom: '1px solid var(--border-light)' }}>
         <div className="container">
@@ -63,9 +63,9 @@ const MediaGallery = () => {
             style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}
           >
             <span className="section-label">Media Records</span>
-            <h1 className="font-serif" style={{ 
-              fontSize: '3rem', 
-              fontWeight: '400', 
+            <h1 className="font-serif" style={{
+              fontSize: '3rem',
+              fontWeight: '400',
               marginBottom: '24px',
               display: 'flex',
               flexWrap: 'wrap',
@@ -180,7 +180,7 @@ const MediaGallery = () => {
                       ratioClass={ratioClass}
                       text={item.title}
                     />
-                    
+
                     {/* Hover Overlay */}
                     <div className="card-hover-overlay" style={{
                       position: 'absolute',

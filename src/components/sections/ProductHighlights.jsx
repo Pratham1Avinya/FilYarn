@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { productsData } from '../../data/content';
 import Placeholder from '../common/Placeholder';
+import YarnVisual from '../common/YarnVisual';
 
 const ProductHighlights = () => {
   return (
@@ -56,7 +57,7 @@ const ProductHighlights = () => {
         </motion.div>
 
         <div className="grid-4" style={{ marginBottom: '40px' }}>
-          {productsData.map((product, idx) => (
+          {productsData.slice(0, 4).map((product, idx) => (
             <motion.div
               key={product.id}
               initial={{ opacity: 0, y: 20 }}
@@ -73,21 +74,25 @@ const ProductHighlights = () => {
               }}
             >
               {/* Product Image Slot */}
-              <div style={{ width: '100%', overflow: 'hidden' }}>
-                <Placeholder
-                  src={product.image}
+              <div style={{ width: '100%', overflow: 'hidden', aspectRatio: '1 / 1' }}>
+                <YarnVisual
+                  src={product.images?.[0] || product.image}
                   alt={product.name}
-                  ratioClass="ratio-1-1"
-                  text={`${product.name} image`}
+                  product={product}
+                  viewIndex={0}
+                  style={{ height: '100%', minHeight: 'unset', border: 'none', borderRadius: '0' }}
                 />
               </div>
 
               {/* Product Info */}
               <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                <h3 style={{ fontSize: '1.15rem', fontWeight: '600', marginBottom: '12px', color: 'var(--text-primary)' }}>
+                <span style={{ fontSize: '0.72rem', color: 'var(--color-accent)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: '700', marginBottom: '6px' }}>
+                  {product.category}
+                </span>
+                <h3 style={{ fontSize: '1.15rem', fontWeight: '600', marginBottom: '10px', color: 'var(--text-primary)' }}>
                   {product.name}
                 </h3>
-                <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '20px', flexGrow: 1 }}>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '20px', flexGrow: 1 }}>
                   {product.shortDesc}
                 </p>
                 <Link
@@ -104,7 +109,7 @@ const ProductHighlights = () => {
                   }}
                   className="product-card-link"
                 >
-                  Explore Product
+                  Explore Specifications & Angles
                   <ArrowRight size={14} />
                 </Link>
               </div>
@@ -120,9 +125,9 @@ const ProductHighlights = () => {
               alignItems: 'center',
               gap: '8px',
               fontSize: '1rem',
-              fontWeight: '500',
+              fontWeight: '600',
               color: 'var(--color-accent)',
-              borderBottom: '1px solid var(--color-accent)',
+              borderBottom: '2px solid var(--color-accent)',
               paddingBottom: '4px',
               transition: 'all 0.2s ease'
             }}
@@ -135,7 +140,7 @@ const ProductHighlights = () => {
               e.currentTarget.style.borderColor = 'var(--color-accent)';
             }}
           >
-            View Complete Product Catalogue
+            Explore Complete 20-Product Yarn Catalogue
             <ArrowRight size={18} />
           </Link>
         </div>
