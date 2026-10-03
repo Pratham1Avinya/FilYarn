@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { Menu, X, Phone, Sun, Moon } from 'lucide-react';
+import { Menu, X, Phone, Sun, Moon, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { companyConfig } from '../../data/config';
 import Button from '../common/Button';
-import WhatsAppButton from '../common/WhatsAppButton';
 
+// Exact navigation items required
 const navigationLinks = [
   { path: '/about', label: 'About Us' },
   { path: '/manufacturing', label: 'Manufacturing' },
@@ -14,12 +14,26 @@ const navigationLinks = [
   { path: '/contact', label: 'Contact Us' }
 ];
 
+// Authentic WhatsApp SVG Brand Icon
+const WhatsAppIcon = ({ size = 16, color = '#25D366' }) => (
+  <svg
+    viewBox="0 0 24 24"
+    width={size}
+    height={size}
+    fill={color}
+    style={{ display: 'block', flexShrink: 0 }}
+    aria-hidden="true"
+  >
+    <path d="M12.004 2C6.51 2 2.014 6.5 2.014 12a9.97 9.97 0 0 0 1.524 5.29L2 22l4.897-1.28A9.92 9.92 0 0 0 12.004 22c5.495 0 9.992-4.5 9.992-10S17.499 2 12.004 2zm5.093 14.28c-.22.617-1.285 1.206-1.776 1.293-.446.08-1.03.149-2.984-.667a12.04 12.04 0 0 1-5.123-4.51c-.675-1.11-1.077-2.39-1.077-3.69 0-2.072 1.07-3.11 1.488-3.52.33-.326.68-.42.9-.42h.64c.2 0 .46.03.68.53.25.56.84 2.07.91 2.22.08.15.13.33.03.53-.1.2-.2.32-.36.5-.16.18-.34.4-.48.54-.16.15-.33.32-.14.65.37.62.82 1.21 1.34 1.74a7.87 7.87 0 0 0 2.28 1.41c.32.15.52.12.71-.1.19-.22.84-.98.98-1.32.14-.34.28-.28.49-.2.2.08 1.32.62 1.55.73.22.1.37.16.42.25.06.09.06.52-.16 1.137z" />
+  </svg>
+);
+
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const { pathname } = useLocation();
 
-  // Theme state
+  // Preserved Theme State & Toggle
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'light';
   });
@@ -33,305 +47,180 @@ const Navbar = () => {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   };
 
+  // Scroll listener with threshold ~50px
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 40) {
+      if (window.scrollY > 50) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // initialize on mount
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on change route
+  // Close mobile drawer on route change
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
   return (
     <>
+      {/* 
+        PREMIUM FLOATING NAVIGATION SYSTEM
+        Evenly distributed, zero-collision layout:
+        Logo (Left) | Centered Navigation Links (Center) | Clear CTAs (Right)
+      */}
       <header
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          zIndex: 990,
-          height: isScrolled ? '70px' : 'var(--header-height)',
-          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-          backgroundColor: isScrolled ? 'var(--bg-primary)' : 'transparent',
-          borderBottom: isScrolled ? '1px solid var(--border-light)' : '1px solid transparent',
-          boxShadow: isScrolled ? '0 4px 20px rgba(0, 0, 0, 0.04)' : 'none',
-          backdropFilter: isScrolled ? 'blur(12px)' : 'none',
-          display: 'flex',
-          alignItems: 'center'
-        }}
+        className={`filyarn-nav-fixed-wrap ${isScrolled ? 'scrolled' : 'at-top'}`}
+        role="banner"
       >
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          {/* Logo Brand Area (Left side) */}
-          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div className={`filyarn-nav-capsule ${isScrolled ? 'scrolled' : 'at-top'}`}>
+          {/* Ambient Glow Halo */}
+          <div className="nav-capsule-halo" aria-hidden="true" />
+
+          {/* Left: Brand Logo */}
+          <Link to="/" className="navbar-brand-link" aria-label="Filyarn Industries Home">
             <img
               src={companyConfig.imagePaths.logo}
               alt="FILYARN Logo"
-              style={{
-                height: '42px',
-                width: 'auto',
-                display: 'block',
-                objectFit: 'contain'
-              }}
+              className="navbar-brand-logo-img"
             />
-            <div style={{ display: 'flex', flexDirection: 'column' }} className="brand-text-wrapper">
-              <span style={{
-                fontFamily: 'var(--font-sans)',
-                fontWeight: '700',
-                fontSize: '1.1rem',
-                letterSpacing: '0.05em',
-                lineHeight: 1.1,
-                color: 'var(--text-primary)'
-              }}>
-                FILYARN
-              </span>
-              <span style={{
-                fontSize: '0.65rem',
-                color: 'var(--text-secondary)',
-                letterSpacing: '0.15em',
-                textTransform: 'uppercase'
-              }}>
-                INDUSTRIES
-              </span>
+            <div className="brand-text-wrapper">
+              <span className="brand-name-title">FILYARN</span>
+              <span className="brand-name-subtitle">INDUSTRIES</span>
             </div>
           </Link>
 
-          {/* Right side container pushing navigation and actions to the right */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }} className="navbar-right-menu">
-            {/* Desktop Navigation Links */}
-            <nav style={{ display: 'flex', alignItems: 'center' }} className="desktop-nav">
-              <ul style={{ listStyle: 'none', display: 'flex', gap: '24px', margin: 0, padding: 0 }}>
-                {navigationLinks.map((link) => (
-                  <li key={link.path} style={{ position: 'relative' }}>
-                    <NavLink
-                      to={link.path}
-                      style={({ isActive }) => ({
-                        fontSize: '0.9rem',
-                        fontWeight: isActive ? '600' : '500',
-                        color: isActive ? 'var(--color-accent)' : 'var(--text-secondary)',
-                        letterSpacing: '0.01em',
-                        transition: 'color 0.25s ease',
-                        padding: '8px 0',
-                        display: 'block'
-                      })}
-                      className="nav-link-item"
-                    >
-                      {link.label}
-                    </NavLink>
-                    {pathname === link.path && (
-                      <motion.div
-                        layoutId="activeIndicator"
-                        style={{
-                          position: 'absolute',
-                          bottom: 0,
-                          left: 0,
-                          width: '100%',
-                          height: '2px',
-                          backgroundColor: 'var(--color-accent)'
-                        }}
-                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                      />
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </nav>
+          {/* 
+            Center: Desktop Navigation Links
+            Clear, readable, centered, with balanced padding and zero text overlapping.
+          */}
+          <nav className="desktop-nav" aria-label="Main Navigation">
+            <ul className="desktop-nav-list">
+              {navigationLinks.map((link) => (
+                <li key={link.path} className="desktop-nav-item">
+                  <NavLink
+                    to={link.path}
+                    className={({ isActive }) =>
+                      `nav-link-item ${isActive ? 'active-nav-link' : ''}`
+                    }
+                  >
+                    {link.label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-            {/* Desktop CTAs */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }} className="desktop-ctas">
-              <WhatsAppButton text="WhatsApp Enquiry" />
-              <a
-                href={`tel:${companyConfig.phone}`}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  fontSize: '0.9rem',
-                  color: 'var(--text-secondary)',
-                  transition: 'color 0.2s ease'
-                }}
-                className="navbar-tel"
-              >
-                <Phone size={16} />
-                {companyConfig.phone}
-              </a>
+          {/* Right: Desktop Actions & CTAs */}
+          <div className="desktop-ctas">
+            {/* WhatsApp Enquiry */}
+            <a
+              href={companyConfig.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="navbar-whatsapp-badge"
+              aria-label="WhatsApp Enquiry"
+            >
+              <WhatsAppIcon size={16} color="#25D366" />
+              <span className="whatsapp-text">WhatsApp Enquiry</span>
+            </a>
 
-              {/* Theme Toggle Switch */}
-              <button
-                onClick={toggleTheme}
-                style={{
-                  background: 'transparent',
-                  border: 'none',
-                  cursor: 'pointer',
-                  color: 'var(--text-primary)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  padding: '8px',
-                  borderRadius: '50%',
-                  transition: 'background-color 0.25s'
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
-                aria-label="Toggle theme mode"
-                className="theme-switcher-btn"
-              >
-                {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
-              </button>
+            {/* Phone */}
+            <a
+              href={`tel:${companyConfig.phone}`}
+              className="navbar-tel-link"
+              aria-label={`Call us at ${companyConfig.phone}`}
+            >
+              <Phone size={14} style={{ flexShrink: 0 }} />
+              <span className="phone-number-text">{companyConfig.phone}</span>
+            </a>
 
-              <Button to="/contact" variant="primary" style={{ padding: '10px 20px', fontSize: '0.85rem' }}>
-                Request a Quote
-              </Button>
-            </div>
-          </div>
-
-          {/* Mobile Menu Action Area */}
-          <div style={{ display: 'none', alignItems: 'center', gap: '16px' }} className="mobile-actions-wrapper">
-            {/* Mobile Theme Toggle */}
+            {/* Dark / Light Mode Switcher */}
             <button
               onClick={toggleTheme}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-                color: 'var(--text-primary)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '6px'
-              }}
               aria-label="Toggle theme mode"
+              className="navbar-theme-btn"
+              type="button"
             >
-              {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+              {theme === 'light' ? <Moon size={16} /> : <Sun size={16} />}
             </button>
 
+            {/* Request a Quote Button */}
+            <Button
+              to="/contact"
+              variant="primary"
+              className="navbar-quote-btn"
+            >
+              <span>Request a Quote</span>
+              <ArrowRight size={14} />
+            </Button>
+          </div>
+
+          {/* Mobile & Tablet Action Controls */}
+          <div className="mobile-actions-wrapper">
+            {/* Theme Toggle Button on Mobile */}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle theme mode"
+              className="navbar-theme-btn mobile-theme-btn"
+              type="button"
+            >
+              {theme === 'light' ? <Moon size={16} /> : <Sun size={16} />}
+            </button>
+
+            {/* WhatsApp Icon Link on Mobile */}
             <a
               href={companyConfig.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp Enquiry"
-              style={{
-                color: '#25D366',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'transform 0.2s ease'
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
-              onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+              className="mobile-whatsapp-btn"
             >
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-                <path d="M12.004 2C6.51 2 2.014 6.5 2.014 12a9.97 9.97 0 0 0 1.524 5.29L2 22l4.897-1.28A9.92 9.92 0 0 0 12.004 22c5.495 0 9.992-4.5 9.992-10S17.499 2 12.004 2zm5.093 14.28c-.22.617-1.285 1.206-1.776 1.293-.446.08-1.03.149-2.984-.667a12.04 12.04 0 0 1-5.123-4.51c-.675-1.11-1.077-2.39-1.077-3.69 0-2.072 1.07-3.11 1.488-3.52.33-.326.68-.42.9-.42h.64c.2 0 .46.03.68.53.25.56.84 2.07.91 2.22.08.15.13.33.03.53-.1.2-.2.32-.36.5-.16.18-.34.4-.48.54-.16.15-.33.32-.14.65.37.62.82 1.21 1.34 1.74a7.87 7.87 0 0 0 2.28 1.41c.32.15.52.12.71-.1.19-.22.84-.98.98-1.32.14-.34.28-.28.49-.2.2.08 1.32.62 1.55.73.22.1.37.16.42.25.06.09.06.52-.16 1.137z" />
-              </svg>
+              <WhatsAppIcon size={17} color="#25D366" />
             </a>
 
+            {/* Hamburger / Close Drawer Toggle */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle Navigation Menu"
-              style={{
-                cursor: 'pointer',
-                color: 'var(--text-primary)',
-                background: 'transparent',
-                border: 'none',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              className="mobile-hamburger-btn"
+              type="button"
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
       </header>
 
-      {/* CSS Rules specifically for desktop/mobile hiding in pure CSS */}
-      <style>{`
-        .nav-link-item {
-          position: relative;
-        }
-        .nav-link-item::after {
-          content: '';
-          position: absolute;
-          width: 100%;
-          height: 2px;
-          bottom: 0;
-          left: 0;
-          background-color: var(--color-accent);
-          transform: scaleX(0);
-          transform-origin: bottom right;
-          transition: transform 0.25s ease-out;
-        }
-        .nav-link-item:hover::after {
-          transform: scaleX(1);
-          transform-origin: bottom left;
-        }
-        .nav-link-item:hover {
-          color: var(--color-accent) !important;
-        }
-        
-        @media (max-width: 991px) {
-          .navbar-right-menu {
-            display: none !important;
-          }
-          .mobile-actions-wrapper {
-            display: flex !important;
-          }
-        }
-        @media (max-width: 480px) {
-          .brand-text-wrapper {
-            display: none !important;
-          }
-        }
-      `}</style>
-
-      {/* Mobile Slide-in Menu Navigation */}
+      {/* Mobile Slide-in Navigation Drawer */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.25 }}
-            style={{
-              position: 'fixed',
-              top: 'var(--header-height)',
-              left: 0,
-              width: '100%',
-              height: 'calc(100vh - var(--header-height))',
-              backgroundColor: 'var(--bg-secondary)',
-              zIndex: 980,
-              borderTop: '1px solid var(--border-light)',
-              display: 'flex',
-              flexDirection: 'column',
-              padding: '40px 24px'
-            }}
+            initial={{ opacity: 0, y: -16, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -16, scale: 0.98 }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+            className={`mobile-drawer-glass ${isScrolled ? 'scrolled-drawer' : 'top-drawer'}`}
           >
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '24px', padding: 0, margin: '0 0 40px 0' }}>
+            <ul className="mobile-nav-list">
               {navigationLinks.map((link, idx) => (
                 <motion.li
                   key={link.path}
-                  initial={{ opacity: 0, x: -10 }}
+                  initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.05 }}
+                  transition={{ delay: idx * 0.04 }}
                 >
                   <NavLink
                     to={link.path}
-                    style={({ isActive }) => ({
-                      fontSize: '1.25rem',
-                      fontWeight: isActive ? '600' : '400',
-                      color: isActive ? 'var(--color-accent)' : 'var(--text-primary)',
-                      display: 'block',
-                      padding: '6px 0'
-                    })}
+                    onClick={() => setIsOpen(false)}
+                    className={({ isActive }) =>
+                      `mobile-nav-item-link ${isActive ? 'active' : ''}`
+                    }
                   >
                     {link.label}
                   </NavLink>
@@ -339,22 +228,638 @@ const Navbar = () => {
               ))}
             </ul>
 
-            <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', paddingBottom: '20px', borderBottom: '1px solid var(--border-light)' }}>
-                <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.1em' }}>Quick Contact</span>
-                <a href={`tel:${companyConfig.phone}`} style={{ fontSize: '1.1rem', fontWeight: '500', display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-primary)' }}>
-                  <Phone size={18} style={{ color: 'var(--color-accent)' }} />
+            <div className="mobile-drawer-footer">
+              <div className="mobile-drawer-contacts">
+                <span className="mobile-contacts-label">Quick Contact</span>
+                <a
+                  href={`tel:${companyConfig.phone}`}
+                  className="mobile-phone-link"
+                >
+                  <Phone size={17} style={{ color: 'var(--color-accent)' }} />
                   {companyConfig.phone}
                 </a>
-                <WhatsAppButton text="Chat on WhatsApp" />
+                <a
+                  href={companyConfig.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mobile-whatsapp-chat-link"
+                >
+                  <WhatsAppIcon size={18} color="#25D366" />
+                  Chat on WhatsApp
+                </a>
               </div>
-              <Button to="/contact" variant="primary" style={{ width: '100%', padding: '14px' }}>
-                Request a Quote
+
+              <Button
+                to="/contact"
+                variant="primary"
+                onClick={() => setIsOpen(false)}
+                className="mobile-quote-cta"
+              >
+                <span>Request a Quote</span>
+                <ArrowRight size={15} />
               </Button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Scoped CSS for the Futuristic Floating Navigation Bar */}
+      <style>{`
+        /* ========================================================
+           FLOATING NAVIGATION SYSTEM - STYLES & TRANSITIONS
+           ======================================================== */
+
+        .filyarn-nav-fixed-wrap {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          z-index: 990;
+          pointer-events: none;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 16px 20px 0 20px;
+          transition: padding 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .filyarn-nav-fixed-wrap.scrolled {
+          padding: 10px 16px 0 16px;
+        }
+
+        /* --------------------------------------------------------
+           CENTRAL FLOATING CAPSULE CONTAINER
+           -------------------------------------------------------- */
+        .filyarn-nav-capsule {
+          pointer-events: auto;
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 95%;
+          max-width: 1440px;
+          height: 68px;
+          padding: 0 28px;
+          border-radius: 9999px;
+          gap: 20px;
+          transition: 
+            width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+            max-width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+            height 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+            padding 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+            gap 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+            background-color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+            box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+            border-color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+            backdrop-filter 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+          will-change: width, height, padding, box-shadow, background-color;
+        }
+
+        /* LIGHT MODE: Top State */
+        .filyarn-nav-capsule.at-top {
+          background: rgba(255, 255, 255, 0.82);
+          border: 1px solid rgba(2, 132, 199, 0.16);
+          box-shadow: 
+            0 10px 30px -8px rgba(2, 132, 199, 0.12),
+            0 4px 20px -2px rgba(99, 102, 241, 0.14),
+            0 0 0 1px rgba(255, 255, 255, 0.85) inset;
+          backdrop-filter: blur(16px) saturate(160%);
+          -webkit-backdrop-filter: blur(16px) saturate(160%);
+        }
+
+        /* LIGHT MODE: Scrolled State (compressed capsule) */
+        .filyarn-nav-capsule.scrolled {
+          width: 90%;
+          max-width: 1260px;
+          height: 56px;
+          padding: 0 20px;
+          gap: 12px;
+          background: rgba(255, 255, 255, 0.94);
+          border: 1px solid rgba(99, 102, 241, 0.22);
+          box-shadow: 
+            0 14px 36px -4px rgba(15, 23, 42, 0.12),
+            0 4px 16px -2px rgba(99, 102, 241, 0.18),
+            0 0 0 1px rgba(255, 255, 255, 0.95) inset;
+          backdrop-filter: blur(22px) saturate(180%);
+          -webkit-backdrop-filter: blur(22px) saturate(180%);
+        }
+
+        /* DARK MODE: Top State */
+        [data-theme="dark"] .filyarn-nav-capsule.at-top {
+          background: rgba(10, 14, 22, 0.72);
+          border: 1px solid rgba(54, 193, 233, 0.22);
+          box-shadow: 
+            0 12px 36px -6px rgba(0, 0, 0, 0.6),
+            0 0 24px -2px rgba(54, 193, 233, 0.16),
+            0 0 32px -4px rgba(99, 102, 241, 0.18),
+            0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+          backdrop-filter: blur(16px) saturate(170%);
+          -webkit-backdrop-filter: blur(16px) saturate(170%);
+        }
+
+        /* DARK MODE: Scrolled State (compressed capsule) */
+        [data-theme="dark"] .filyarn-nav-capsule.scrolled {
+          width: 90%;
+          max-width: 1260px;
+          height: 56px;
+          padding: 0 20px;
+          gap: 12px;
+          background: rgba(8, 12, 18, 0.90);
+          border: 1px solid rgba(99, 102, 241, 0.32);
+          box-shadow: 
+            0 16px 42px -4px rgba(0, 0, 0, 0.78),
+            0 0 22px rgba(99, 102, 241, 0.26),
+            0 2px 10px rgba(54, 193, 233, 0.2),
+            0 0 0 1px rgba(255, 255, 255, 0.12) inset;
+          backdrop-filter: blur(24px) saturate(190%);
+          -webkit-backdrop-filter: blur(24px) saturate(190%);
+        }
+
+        /* --------------------------------------------------------
+           AMBIENT CAPSULE GLOW HALO
+           -------------------------------------------------------- */
+        .nav-capsule-halo {
+          position: absolute;
+          inset: -4px -6px;
+          border-radius: 9999px;
+          pointer-events: none;
+          z-index: -1;
+          filter: blur(16px);
+          opacity: 0.85;
+          transition: all 0.45s ease;
+        }
+
+        .at-top .nav-capsule-halo {
+          background: radial-gradient(ellipse at 50% 50%, rgba(99, 102, 241, 0.18), rgba(2, 132, 199, 0.12), transparent 70%);
+        }
+
+        [data-theme="dark"] .at-top .nav-capsule-halo {
+          background: radial-gradient(ellipse at 50% 50%, rgba(99, 102, 241, 0.22), rgba(54, 193, 233, 0.18), transparent 70%);
+        }
+
+        .scrolled .nav-capsule-halo {
+          opacity: 0.6;
+          inset: -2px -4px;
+        }
+
+        /* --------------------------------------------------------
+           BRAND LOGO & TEXT (Left Side)
+           -------------------------------------------------------- */
+        .navbar-brand-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          text-decoration: none;
+          flex-shrink: 0;
+        }
+
+        .navbar-brand-logo-img {
+          height: 36px;
+          width: auto;
+          display: block;
+          object-fit: contain;
+          transition: height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .scrolled .navbar-brand-logo-img {
+          height: 30px;
+        }
+
+        .brand-text-wrapper {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .brand-name-title {
+          font-family: var(--font-sans);
+          font-weight: 700;
+          font-size: 1rem;
+          letter-spacing: 0.05em;
+          line-height: 1.1;
+          color: var(--text-primary);
+          transition: font-size 0.45s ease;
+        }
+
+        .scrolled .brand-name-title {
+          font-size: 0.94rem;
+        }
+
+        .brand-name-subtitle {
+          font-size: 0.60rem;
+          color: var(--text-secondary);
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          transition: font-size 0.45s ease;
+        }
+
+        .scrolled .brand-name-subtitle {
+          font-size: 0.54rem;
+        }
+
+        /* --------------------------------------------------------
+           CENTER NAVIGATION LINKS
+           Spacious, readable, centered without any collision!
+           -------------------------------------------------------- */
+        .desktop-nav {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .desktop-nav-list {
+          list-style: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 22px;
+          margin: 0;
+          padding: 0;
+          transition: gap 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .scrolled .desktop-nav-list {
+          gap: 16px;
+        }
+
+        .desktop-nav-item {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .nav-link-item {
+          position: relative;
+          font-size: 0.88rem;
+          font-weight: 500;
+          color: var(--text-secondary);
+          letter-spacing: 0.01em;
+          padding: 8px 6px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          text-decoration: none;
+          white-space: nowrap;
+          transition: color 0.25s ease, padding 0.45s ease, font-size 0.45s ease;
+        }
+
+        .scrolled .nav-link-item {
+          font-size: 0.83rem;
+          padding: 6px 4px;
+        }
+
+        /* Hover & Active Underline: Expands symmetrically from center */
+        .nav-link-item::after {
+          content: '';
+          position: absolute;
+          bottom: 0px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 0;
+          height: 2px;
+          background: linear-gradient(90deg, #0284c7, var(--color-accent));
+          border-radius: 2px;
+          box-shadow: 0 0 8px rgba(99, 102, 241, 0.6);
+          transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-link-item:hover::after {
+          width: 80%;
+        }
+
+        .nav-link-item.active-nav-link::after {
+          width: 80%;
+        }
+
+        .nav-link-item:hover {
+          color: var(--color-accent) !important;
+        }
+
+        .nav-link-item.active-nav-link {
+          color: var(--color-accent) !important;
+          font-weight: 600;
+        }
+
+        /* --------------------------------------------------------
+           RIGHT CTAs & ACTIONS
+           -------------------------------------------------------- */
+        .desktop-ctas {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          gap: 12px;
+          flex-shrink: 0;
+          transition: gap 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .scrolled .desktop-ctas {
+          gap: 9px;
+        }
+
+        /* WhatsApp Badge */
+        .navbar-whatsapp-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          color: #25D366;
+          font-weight: 600;
+          font-size: 0.82rem;
+          padding: 6px 12px;
+          border-radius: 9999px;
+          background: rgba(37, 211, 102, 0.08);
+          border: 1px solid rgba(37, 211, 102, 0.24);
+          text-decoration: none;
+          white-space: nowrap;
+          transition: all 0.25s ease;
+        }
+
+        .scrolled .navbar-whatsapp-badge {
+          font-size: 0.78rem;
+          padding: 4px 10px;
+        }
+
+        .navbar-whatsapp-badge:hover {
+          background: rgba(37, 211, 102, 0.16);
+          border-color: rgba(37, 211, 102, 0.45);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+        }
+
+        /* Phone Link */
+        .navbar-tel-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 0.82rem;
+          color: var(--text-secondary);
+          text-decoration: none;
+          white-space: nowrap;
+          transition: color 0.2s ease, font-size 0.45s ease;
+        }
+
+        .scrolled .navbar-tel-link {
+          font-size: 0.78rem;
+        }
+
+        .navbar-tel-link:hover {
+          color: var(--text-primary);
+        }
+
+        /* Theme Toggle Button */
+        .navbar-theme-btn {
+          background: transparent;
+          border: 1px solid var(--border-light);
+          cursor: pointer;
+          color: var(--text-primary);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 34px;
+          height: 34px;
+          border-radius: 50%;
+          flex-shrink: 0;
+          transition: all 0.25s ease;
+        }
+
+        .scrolled .navbar-theme-btn {
+          width: 30px;
+          height: 30px;
+        }
+
+        .navbar-theme-btn:hover {
+          background: rgba(99, 102, 241, 0.1);
+          border-color: var(--color-accent);
+          color: var(--color-accent);
+        }
+
+        /* Request a Quote CTA Button */
+        .navbar-quote-btn {
+          padding: 8px 18px !important;
+          font-size: 0.82rem !important;
+          border-radius: 9999px !important;
+          font-weight: 600 !important;
+          background: var(--gradient-brand) !important;
+          box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4) !important;
+          display: inline-flex !important;
+          align-items: center !important;
+          gap: 6px !important;
+          white-space: nowrap !important;
+          text-decoration: none !important;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+
+        .scrolled .navbar-quote-btn {
+          padding: 6px 14px !important;
+          font-size: 0.78rem !important;
+          box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35) !important;
+        }
+
+        .navbar-quote-btn:hover {
+          transform: translateY(-1px) !important;
+          box-shadow: 0 6px 22px rgba(99, 102, 241, 0.55) !important;
+        }
+
+        /* --------------------------------------------------------
+           MOBILE & TABLET ACTIONS
+           -------------------------------------------------------- */
+        .mobile-actions-wrapper {
+          display: none;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .mobile-theme-btn {
+          width: 34px !important;
+          height: 34px !important;
+        }
+
+        .mobile-whatsapp-btn {
+          color: #25D366;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 34px;
+          height: 34px;
+          border-radius: 50%;
+          background: rgba(37, 211, 102, 0.1);
+          border: 1px solid rgba(37, 211, 102, 0.25);
+          transition: transform 0.2s ease;
+        }
+
+        .mobile-whatsapp-btn:hover {
+          transform: scale(1.08);
+        }
+
+        .mobile-hamburger-btn {
+          cursor: pointer;
+          color: var(--text-primary);
+          background: transparent;
+          border: 1px solid var(--border-light);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 34px;
+          height: 34px;
+          border-radius: 50%;
+          transition: all 0.25s ease;
+        }
+
+        .mobile-hamburger-btn:hover {
+          border-color: var(--color-accent);
+          color: var(--color-accent);
+        }
+
+        /* --------------------------------------------------------
+           MOBILE SLIDE-IN GLASS DRAWER
+           -------------------------------------------------------- */
+        .mobile-drawer-glass {
+          position: fixed;
+          top: 86px;
+          left: 16px;
+          right: 16px;
+          max-width: 480px;
+          margin: 0 auto;
+          background-color: var(--bg-secondary);
+          backdrop-filter: blur(24px) saturate(180%);
+          -webkit-backdrop-filter: blur(24px) saturate(180%);
+          z-index: 980;
+          border-radius: 24px;
+          border: 1px solid var(--border-light);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2), 0 0 30px rgba(99, 102, 241, 0.15);
+          display: flex;
+          flex-direction: column;
+          padding: 28px 24px;
+          pointer-events: auto;
+        }
+
+        .mobile-drawer-glass.scrolled-drawer {
+          top: 74px;
+        }
+
+        [data-theme="dark"] .mobile-drawer-glass {
+          background-color: rgba(10, 14, 22, 0.95);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(99, 102, 241, 0.25);
+        }
+
+        .mobile-nav-list {
+          list-style: none;
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          padding: 0;
+          margin: 0 0 24px 0;
+        }
+
+        .mobile-nav-item-link {
+          font-size: 1.15rem;
+          font-weight: 400;
+          color: var(--text-primary);
+          display: block;
+          padding: 8px 12px;
+          border-radius: 8px;
+          text-decoration: none;
+          transition: all 0.2s ease;
+        }
+
+        .mobile-nav-item-link.active {
+          color: var(--color-accent);
+          font-weight: 600;
+          background-color: rgba(99, 102, 241, 0.08);
+        }
+
+        .mobile-drawer-footer {
+          margin-top: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .mobile-drawer-contacts {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          padding-bottom: 16px;
+          border-bottom: 1px solid var(--border-light);
+        }
+
+        .mobile-contacts-label {
+          font-size: 0.75rem;
+          text-transform: uppercase;
+          color: var(--text-muted);
+          letter-spacing: 0.12em;
+        }
+
+        .mobile-phone-link {
+          font-size: 1rem;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          color: var(--text-primary);
+          text-decoration: none;
+        }
+
+        .mobile-whatsapp-chat-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          color: #25D366;
+          font-weight: 600;
+          font-size: 0.95rem;
+          margin-top: 4px;
+          text-decoration: none;
+        }
+
+        .mobile-quote-cta {
+          width: 100% !important;
+          padding: 12px !important;
+          border-radius: 9999px !important;
+          background: var(--gradient-brand) !important;
+          box-shadow: 0 4px 18px rgba(99, 102, 241, 0.4) !important;
+          justify-content: center !important;
+          display: flex !important;
+          align-items: center !important;
+          gap: 8px !important;
+          text-decoration: none !important;
+        }
+
+        /* --------------------------------------------------------
+           RESPONSIVE BREAKPOINTS
+           -------------------------------------------------------- */
+        @media (max-width: 1260px) {
+          .phone-number-text {
+            display: none;
+          }
+          .desktop-nav-list {
+            gap: 16px;
+          }
+          .desktop-ctas {
+            gap: 10px;
+          }
+        }
+
+        @media (max-width: 1100px) {
+          .desktop-nav,
+          .desktop-ctas {
+            display: none !important;
+          }
+          .mobile-actions-wrapper {
+            display: flex !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .brand-text-wrapper {
+            display: none !important;
+          }
+          .filyarn-nav-capsule {
+            width: 96% !important;
+            padding: 0 16px !important;
+          }
+        }
+      `}</style>
     </>
   );
 };

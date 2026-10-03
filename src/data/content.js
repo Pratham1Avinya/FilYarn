@@ -13,43 +13,43 @@ export const manufacturingSteps = [
   {
     step: "02",
     title: "Fibre Preparation",
-    desc: "Opening, blending, and carding the raw fibers to align them parallelly, forming a continuous web or sliver.",
+    desc: "Opening, blending, and carding raw fibers to align them and form a continuous web or sliver.",
     image: "/images/manufacturing/fibre-preparation.jpg"
   },
   {
     step: "03",
     title: "Spinning",
-    desc: "Drawing and twisting the slivers on ring frames or rotor systems to create single yarn with target thickness.",
+    desc: "Drawing and twisting the slivers through advanced spinning systems to create yarn with controlled thickness.",
     image: "/images/manufacturing/spinning.jpg"
   },
   {
     step: "04",
     title: "Yarn Formation",
-    desc: "Doubling and twisting multiple strands together to achieve the required ply, ply balance, and tensile properties.",
+    desc: "Doubling and twisting multiple strands to achieve the required ply, balance, and tensile properties.",
     image: "/images/manufacturing/yarn-formation.jpg"
   },
   {
     step: "05",
     title: "Winding",
-    desc: "Clearing imperfections electronically and winding the yarn onto cones or cheeses suitable for subsequent processing.",
+    desc: "Electronically clearing imperfections and winding yarn onto cones or cheeses for further processing.",
     image: "/images/manufacturing/winding.jpg"
   },
   {
     step: "06",
     title: "Dyeing & Finishing",
-    desc: "Treating and dyeing the yarn package under high pressure and temperature to ensure brilliant, even colors.",
+    desc: "Treating and dyeing yarn packages under controlled pressure and temperature for consistent finishing.",
     image: "/images/manufacturing/dyeing-finishing.jpg"
   },
   {
     step: "07",
     title: "Quality Inspection",
-    desc: "Testing yarn count, twist per inch (TPI), strength, colorfastness, and hairiness against strict standards.",
+    desc: "Testing yarn count, twist, strength, colorfastness, and other quality parameters against standards.",
     image: "/images/manufacturing/quality-control.jpg"
   },
   {
     step: "08",
     title: "Packing & Dispatch",
-    desc: "Carefully packing finished yarn cones in carton boxes or bags to prevent contamination and damage during transit.",
+    desc: "Carefully packing finished yarn cones in cartons or bags to prevent contamination and damage during transit.",
     image: "/images/manufacturing/packing-dispatch.jpg"
   }
 ];
