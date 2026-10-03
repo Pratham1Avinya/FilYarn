@@ -6,51 +6,51 @@ export const productsData = allProductsData;
 export const manufacturingSteps = [
   {
     step: "01",
-    title: "Raw Material Selection",
-    desc: "Sourcing premium-grade polyester staple fibers with consistent length, denier, and strength characteristics.",
+    title: "Raw Material",
+    desc: "Direct procurement of premium high-tenacity raw white plain yarn packages and cheeses from certified primary producers.",
     image: "/images/manufacturing/raw-material.jpg"
   },
   {
     step: "02",
-    title: "Fibre Preparation",
-    desc: "Opening, blending, and carding raw fibers to align them and form a continuous web or sliver.",
-    image: "/images/manufacturing/fibre-preparation.jpg"
-  },
-  {
-    step: "03",
-    title: "Spinning",
-    desc: "Drawing and twisting the slivers through advanced spinning systems to create yarn with controlled thickness.",
-    image: "/images/manufacturing/spinning.jpg"
-  },
-  {
-    step: "04",
-    title: "Yarn Formation",
-    desc: "Doubling and twisting multiple strands to achieve the required ply, balance, and tensile properties.",
-    image: "/images/manufacturing/yarn-formation.jpg"
-  },
-  {
-    step: "05",
     title: "Winding",
-    desc: "Electronically clearing imperfections and winding yarn onto cones or cheeses for further processing.",
+    desc: "Precision high-speed soft winding of plain yarn onto perforated dye tubes and springs with uniform package density.",
     image: "/images/manufacturing/winding.jpg"
   },
   {
+    step: "03",
+    title: "Yarn Twisting",
+    desc: "Advanced Two-for-One (TFO) twisting imparting exact turns per meter (TPM) and ply doubling for maximum tensile strength.",
+    image: "/images/manufacturing/yarn-twisting.jpg"
+  },
+  {
+    step: "04",
+    title: "Dyeing",
+    desc: "High-temperature, high-pressure (HTHP) package dyeing with computerized color dispensing for deep, consistent shade matching.",
+    image: "/images/manufacturing/dyeing.jpg"
+  },
+  {
+    step: "05",
+    title: "Coning",
+    desc: "Precision rewinding onto paper or plastic cones with uniform wax lubrication, electronic tension control, and fault clearing.",
+    image: "/images/manufacturing/coning.jpg"
+  },
+  {
     step: "06",
-    title: "Dyeing & Finishing",
-    desc: "Treating and dyeing yarn packages under controlled pressure and temperature for consistent finishing.",
-    image: "/images/manufacturing/dyeing-finishing.jpg"
+    title: "Quality Inspection",
+    desc: "Comprehensive testing covering spectrophotometer shade matching, tensile strength, twist balance, and count consistency.",
+    image: "/images/manufacturing/quality-inspection.jpg"
   },
   {
     step: "07",
-    title: "Quality Inspection",
-    desc: "Testing yarn count, twist, strength, colorfastness, and other quality parameters against standards.",
-    image: "/images/manufacturing/quality-control.jpg"
+    title: "Packing",
+    desc: "Individual protective poly-wrapping and shock-resistant carton boxing with clear batch identification and barcoded labels.",
+    image: "/images/manufacturing/packing.jpg"
   },
   {
     step: "08",
-    title: "Packing & Dispatch",
-    desc: "Carefully packing finished yarn cones in cartons or bags to prevent contamination and damage during transit.",
-    image: "/images/manufacturing/packing-dispatch.jpg"
+    title: "Dispatch",
+    desc: "Secure pallet staging, warehouse logistics verification, and expedited freight dispatch for prompt, reliable delivery.",
+    image: "/images/manufacturing/dispatch.jpg"
   }
 ];
 

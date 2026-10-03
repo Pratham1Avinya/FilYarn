@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
@@ -6,43 +6,40 @@ import {
   Truck,
   Users,
   ArrowRight,
-  Play,
-  Square,
-  Factory,
-  X
+  Factory
 } from 'lucide-react';
 
+const facilityImages = [
+  {
+    src: "/images/company/who-we-are.jpg",
+    alt: "Rieter Spinning Hall - State-of-the-Art Facility"
+  },
+  {
+    src: "/images/manufacturing/manufacturing-process-poster.jpg",
+    alt: "Precision Manufacturing and Spinning Lines"
+  },
+  {
+    src: "/images/manufacturing/yarn-twisting.jpg",
+    alt: "High-Tenacity TFO Twisting Machines"
+  },
+  {
+    src: "/images/manufacturing/coning.jpg",
+    alt: "Precision Coning and Package Winding"
+  }
+];
+
 const CompanyIntro = () => {
-  // In-place video playback state: plays directly inside the section image frame (no big screen modal)
-  // In-place video playback state: plays directly in the frame
-  const [isPlayingInPlace, setIsPlayingInPlace] = useState(false);
-  const videoRef = useRef(null);
+  // Auto-changing facility image state (smooth cross-fade every 4 seconds)
+  const [currentImageIdx, setCurrentImageIdx] = useState(0);
 
-  // Toggle in-place play / stop directly on the video
-  const handleTogglePlay = () => {
-    if (!videoRef.current) return;
-    if (!isPlayingInPlace) {
-      videoRef.current.play().then(() => {
-        setIsPlayingInPlace(true);
-      }).catch(() => {
-        setIsPlayingInPlace(true);
-      });
-    } else {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-      setIsPlayingInPlace(false);
-    }
-  };
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIdx((prev) => (prev + 1) % facilityImages.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
 
-  const handleStopVideo = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
-    setIsPlayingInPlace(false);
-  };
-
-  // 3 Key Value Points as horizontal feature rows
+  // 3 Key Value Points as horizontal feature rows with active cycling
   const valuePoints = [
     {
       icon: ShieldCheck,
@@ -60,6 +57,16 @@ const CompanyIntro = () => {
       desc: "Long-term customer relationships"
     }
   ];
+
+  const [activeValueIndex, setActiveValueIndex] = useState(0);
+
+  // Auto-cycle active feature point highlight every 3.6s
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveValueIndex((prev) => (prev + 1) % valuePoints.length);
+    }, 3600);
+    return () => clearInterval(interval);
+  }, [valuePoints.length]);
 
   return (
     <section className="section who-we-are-section" id="who-we-are">
@@ -118,14 +125,16 @@ const CompanyIntro = () => {
               Filyarn Industries Pvt. Ltd. is a prominent textile manufacturer and B2B supplier based in Surat, Gujarat. The company focuses on dependable yarn and sewing thread solutions, responsive customer service and reliable supply for textile and garment businesses.
             </motion.p>
 
-            {/* Three Value Feature Rows - Staggered Slide In from Left */}
+            {/* Three Value Feature Rows - Staggered Slide In with Active Highlight Indicator */}
             <div className="who-features-list">
               {valuePoints.map((point, index) => {
                 const IconComponent = point.icon;
+                const isActive = activeValueIndex === index;
                 return (
                   <motion.div
                     key={point.title}
-                    className="who-feature-row"
+                    className={`who-feature-row ${isActive ? 'is-active' : ''}`}
+                    onMouseEnter={() => setActiveValueIndex(index)}
                     initial={{ opacity: 0, x: -35 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
@@ -138,6 +147,13 @@ const CompanyIntro = () => {
                       <h4 className="who-feature-title">{point.title}</h4>
                       <p className="who-feature-desc">{point.desc}</p>
                     </div>
+                    {isActive && (
+                      <motion.div 
+                        layoutId="activeFeatureBar"
+                        className="who-feature-active-indicator"
+                        transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                      />
+                    )}
                   </motion.div>
                 );
               })}
@@ -226,7 +242,7 @@ const CompanyIntro = () => {
                 <circle cx="414" cy="538" r="2" fill="#ffffff" />
               </svg>
 
-              {/* Main Company Video Frame: Direct video playback with about/About-section.mp4, no image swap */}
+              {/* Main Company Frame: Auto-changing Facility Images with Smooth Cross-fade */}
               <motion.div 
                 className="who-image-frame"
                 initial={{ opacity: 0, y: 25, scale: 0.97 }}
@@ -234,29 +250,28 @@ const CompanyIntro = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               >
-                <video 
-                  ref={videoRef}
-                  src="/videos/about/About-section.mp4" 
-                  className="who-main-video"
-                  preload="metadata"
-                  playsInline
-                  controls={isPlayingInPlace}
-                  onPlay={() => setIsPlayingInPlace(true)}
-                  onPause={() => setIsPlayingInPlace(false)}
-                  onEnded={handleStopVideo}
-                >
-                  Your browser does not support HTML5 video.
-                </video>
+                <AnimatePresence mode="sync">
+                  <motion.img 
+                    key={currentImageIdx}
+                    src={facilityImages[currentImageIdx].src}
+                    alt={facilityImages[currentImageIdx].alt}
+                    className="who-main-image"
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1.1, ease: [0.25, 0.1, 0.25, 1] }}
+                  />
+                </AnimatePresence>
                 <div className="who-image-overlay" />
               </motion.div>
 
-              {/* Floating Card 1: Top-Right "Trusted Textile Partner" with slide-in and gentle levitation */}
+              {/* Floating Card 1: Top-Right "Trusted Textile Partner" */}
               <motion.div 
-                className={`who-float-card who-float-top-right ${isPlayingInPlace ? 'is-video-playing' : ''}`}
+                className="who-float-card who-float-top-right"
                 initial={{ opacity: 0, y: -25, x: 25 }}
                 whileInView={{ opacity: 1, y: 0, x: 0 }}
                 viewport={{ once: true }}
-                animate={!isPlayingInPlace ? { y: [-3, 3, -3] } : {}}
+                animate={{ y: [-3, 3, -3] }}
                 transition={{
                   duration: 0.65,
                   delay: 0.35,
@@ -274,13 +289,13 @@ const CompanyIntro = () => {
                 </div>
               </motion.div>
 
-              {/* Floating Card 2: Left-Middle Statistics Card with slide-in from left and gentle levitation */}
+              {/* Floating Card 2: Left-Middle Statistics Card */}
               <motion.div 
-                className={`who-float-card who-float-stats ${isPlayingInPlace ? 'is-video-playing' : ''}`}
+                className="who-float-card who-float-stats"
                 initial={{ opacity: 0, x: -40, y: 15 }}
                 whileInView={{ opacity: 1, x: 0, y: 0 }}
                 viewport={{ once: true }}
-                animate={!isPlayingInPlace ? { y: [3, -3, 3] } : {}}
+                animate={{ y: [3, -3, 3] }}
                 transition={{
                   duration: 0.65,
                   delay: 0.45,
@@ -304,55 +319,6 @@ const CompanyIntro = () => {
                   <span className="who-stat-number">100+</span>
                 </div>
               </motion.div>
-
-              {/* 
-                Interactive Play / Stop Button with Concentric Ripple Circles & Pulse Animation
-                - Directly plays and stops the video in place
-                - Clean Stop icon (■) only, NO stop word text
-              */}
-              <motion.button
-                type="button"
-                className={`who-play-button ${isPlayingInPlace ? 'is-playing' : ''}`}
-                onClick={handleTogglePlay}
-                aria-label={isPlayingInPlace ? "Stop video" : "Play company video"}
-                title={isPlayingInPlace ? "Stop video" : "Play video"}
-                initial={{ opacity: 0, scale: 0.6 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.55, delay: 0.5, type: "spring", stiffness: 260, damping: 20 }}
-              >
-                {/* Outer animated ripple ring */}
-                <motion.span 
-                  className="who-play-ring-outer" 
-                  animate={{
-                    scale: isPlayingInPlace ? [1, 1.1, 1] : [1, 1.08, 1],
-                    opacity: isPlayingInPlace ? [0.65, 0.95, 0.65] : [0.55, 0.85, 0.55]
-                  }}
-                  transition={{ duration: isPlayingInPlace ? 1.8 : 2.6, repeat: Infinity, ease: "easeInOut" }}
-                />
-                
-                {/* Middle concentric ring */}
-                <motion.span 
-                  className="who-play-ring-middle" 
-                  animate={{
-                    scale: isPlayingInPlace ? [1, 1.05, 1] : [1, 1.04, 1]
-                  }}
-                  transition={{ duration: isPlayingInPlace ? 1.8 : 2.6, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
-                />
-                
-                {/* Core button with Play or Stop icon */}
-                <motion.span 
-                  className="who-play-core"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.94 }}
-                >
-                  {isPlayingInPlace ? (
-                    <Square size={18} className="who-stop-icon" fill="#ffffff" strokeWidth={0} />
-                  ) : (
-                    <Play size={22} className="who-play-icon" />
-                  )}
-                </motion.span>
-              </motion.button>
 
             </div>
           </motion.div>
@@ -460,7 +426,7 @@ const CompanyIntro = () => {
         .who-features-list {
           display: flex;
           flex-direction: column;
-          gap: 18px;
+          gap: 14px;
           margin-bottom: 38px;
         }
 
@@ -468,6 +434,28 @@ const CompanyIntro = () => {
           display: flex;
           align-items: center;
           gap: 16px;
+          padding: 10px 18px 10px 12px;
+          border-radius: 14px;
+          position: relative;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          cursor: pointer;
+        }
+
+        .who-feature-row.is-active,
+        .who-feature-row:hover {
+          background: rgba(99, 102, 241, 0.05);
+          transform: translateX(6px);
+        }
+
+        .who-feature-active-indicator {
+          position: absolute;
+          left: 0;
+          top: 15%;
+          bottom: 15%;
+          width: 3px;
+          border-radius: 4px;
+          background: linear-gradient(180deg, #6366f1, #4f46e5);
+          box-shadow: 0 0 10px rgba(99, 102, 241, 0.6);
         }
 
         .who-feature-icon-pill {
@@ -481,13 +469,15 @@ const CompanyIntro = () => {
           justify-content: center;
           flex-shrink: 0;
           border: 1px solid rgba(99, 102, 241, 0.15);
-          transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
         }
 
+        .who-feature-row.is-active .who-feature-icon-pill,
         .who-feature-row:hover .who-feature-icon-pill {
-          transform: scale(1.08);
-          background: var(--color-accent);
+          transform: scale(1.1);
+          background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
           color: #ffffff;
+          box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
         }
 
         .who-feature-text {
@@ -502,6 +492,12 @@ const CompanyIntro = () => {
           color: var(--text-primary);
           margin: 0;
           line-height: 1.25;
+          transition: color 0.25s ease;
+        }
+
+        .who-feature-row.is-active .who-feature-title,
+        .who-feature-row:hover .who-feature-title {
+          color: var(--color-accent);
         }
 
         .who-feature-desc {
@@ -604,27 +600,24 @@ const CompanyIntro = () => {
             0 14px 32px -6px rgba(0, 0, 0, 0.65);
         }
 
-        .who-main-video {
+        .who-main-image {
+          position: absolute;
+          inset: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
           display: block;
-          background-color: #0b0f17;
-          transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .who-composition-wrap:hover .who-main-video {
-          transform: scale(1.02);
         }
 
         .who-image-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(180deg, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 0.25) 100%);
+          background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.35) 100%);
           pointer-events: none;
+          z-index: 3;
         }
 
-        /* Floating Information Card 1: Top-Right (Multi-layer Ambient Soft Shadow) */
+        /* Floating Information Card 1: Top-Right (Multi-layer Ambient Soft Shadow & Shimmer) */
         .who-float-card {
           position: absolute;
           background: #ffffff;
@@ -633,7 +626,35 @@ const CompanyIntro = () => {
           z-index: 5;
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);
+          overflow: hidden;
           transition: transform 0.25s ease, opacity 0.3s ease, box-shadow 0.25s ease;
+        }
+
+        .who-float-card::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -120%;
+          width: 60%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+          transform: skewX(-20deg);
+          animation: cardShimmerSweep 5s ease-in-out infinite;
+          pointer-events: none;
+        }
+
+        @keyframes cardShimmerSweep {
+          0%, 70% {
+            left: -120%;
+            opacity: 0;
+          }
+          75% {
+            opacity: 0.8;
+          }
+          100% {
+            left: 220%;
+            opacity: 0;
+          }
         }
 
         [data-theme="dark"] .who-float-card {
@@ -746,108 +767,6 @@ const CompanyIntro = () => {
         .who-float-card.is-video-playing {
           opacity: 0.22;
           pointer-events: none;
-        }
-
-        /* 
-          Interactive Video Play / Stop Button with Concentric Ripple Circles & Animations
-        */
-        .who-play-button {
-          position: absolute;
-          right: -36px;
-          top: 48%;
-          transform: translateY(-50%);
-          width: 108px;
-          height: 108px;
-          border-radius: 50%;
-          border: none;
-          background: transparent;
-          cursor: pointer;
-          z-index: 25;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 0;
-          outline: none;
-          transition: transform 0.25s ease;
-        }
-
-        /* Outer Large Translucent Periwinkle/Lavender Ripple Ring with Pulse */
-        .who-play-ring-outer {
-          position: absolute;
-          inset: 0;
-          border-radius: 50%;
-          background: rgba(224, 231, 255, 0.6);
-          border: 1.5px solid rgba(199, 210, 254, 0.5);
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
-          box-shadow: 0 10px 30px rgba(99, 102, 241, 0.14);
-          transition: transform 0.35s ease, background 0.35s ease, border-color 0.35s ease;
-        }
-
-        /* Middle Concentric Ring */
-        .who-play-ring-middle {
-          position: absolute;
-          inset: 15px;
-          border-radius: 50%;
-          background: rgba(210, 222, 254, 0.75);
-          border: 1px solid rgba(199, 210, 254, 0.6);
-          transition: transform 0.35s ease, background 0.35s ease;
-        }
-
-        /* Core Vibrant Blue/Purple Button with Drop Shadow */
-        .who-play-core {
-          position: relative;
-          width: 52px;
-          height: 52px;
-          border-radius: 50%;
-          background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-          box-shadow: 0 8px 24px rgba(79, 70, 229, 0.45);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #ffffff;
-          transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background 0.3s ease;
-        }
-
-        .who-play-icon {
-          margin-left: 3px;
-          fill: #ffffff;
-        }
-
-        .who-stop-icon {
-          fill: #ffffff;
-        }
-
-        .who-play-button:hover .who-play-ring-outer {
-          transform: scale(1.12);
-          background: rgba(224, 231, 255, 0.75);
-        }
-
-        .who-play-button:hover .who-play-core {
-          transform: scale(1.08);
-          box-shadow: 0 10px 28px rgba(79, 70, 229, 0.6);
-        }
-
-        /* When Playing Video: turns to active Stop state (No stop word text, pure icon) */
-        .who-play-button.is-playing .who-play-ring-outer {
-          background: rgba(254, 226, 226, 0.65);
-          border-color: rgba(252, 165, 165, 0.55);
-          box-shadow: 0 10px 30px rgba(244, 63, 94, 0.22);
-        }
-
-        .who-play-button.is-playing .who-play-ring-middle {
-          background: rgba(254, 202, 202, 0.75);
-          border-color: rgba(248, 113, 113, 0.45);
-        }
-
-        .who-play-button.is-playing .who-play-core {
-          background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
-          box-shadow: 0 8px 24px rgba(244, 63, 94, 0.55);
-        }
-
-        .who-play-button.is-playing:hover .who-play-core {
-          transform: scale(1.08);
-          box-shadow: 0 10px 28px rgba(244, 63, 94, 0.7);
         }
 
         /* Responsive Breakpoints */

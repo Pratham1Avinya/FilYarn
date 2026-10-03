@@ -2,14 +2,14 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
-  Layers, 
-  Sliders, 
+  Box,
   RotateCw, 
   GitMerge, 
-  Disc, 
   Droplets, 
+  Disc, 
   ShieldCheck, 
   PackageCheck, 
+  Truck,
   ArrowRight,
   ChevronLeft,
   ChevronRight,
@@ -20,14 +20,14 @@ import { manufacturingSteps } from '../../data/content';
 
 // Iconography mapping for all 8 manufacturing steps
 const STEP_ICONS = [
-  Layers,
-  Sliders,
-  RotateCw,
-  GitMerge,
-  Disc,
-  Droplets,
-  ShieldCheck,
-  PackageCheck
+  Box,          // 01: Raw Material
+  RotateCw,     // 02: Winding
+  GitMerge,     // 03: Yarn Twisting
+  Droplets,     // 04: Dyeing
+  Disc,         // 05: Coning
+  ShieldCheck,  // 06: Quality Inspection
+  PackageCheck, // 07: Packing
+  Truck         // 08: Dispatch
 ];
 
 const ManufacturingSteps = () => {
