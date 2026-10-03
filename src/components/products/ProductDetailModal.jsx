@@ -54,9 +54,9 @@ const ProductDetailModal = ({ product, isOpen, onClose, isFavorite, onToggleFavo
   // Determine 5 angles list for product
   const primaryImg = product.image || (
     product.id?.includes('140') ? '/images/products/yarn-140.jpg' :
-    product.id?.includes('160') ? '/images/products/yarn-160.jpg' :
-    product.id?.includes('sewing') || product.id?.includes('spun') ? '/images/products/sewing-thread.jpg' :
-    '/images/products/yarn-110.jpg'
+      product.id?.includes('160') ? '/images/products/yarn-160.jpg' :
+        product.id?.includes('sewing') || product.id?.includes('spun') ? '/images/products/sewing-thread.jpg' :
+          '/images/products/yarn-110.jpg'
   );
 
   const imagesList = [
@@ -85,11 +85,11 @@ const ProductDetailModal = ({ product, isOpen, onClose, isFavorite, onToggleFavo
   const apps = product.applications && product.applications.length > 0
     ? product.applications
     : [
-        "Two-Tone Cross-Dye Weaving",
-        "Melange Saree & Dress Materials",
-        "Fancy, Jacquard & Brocade Fabrics",
-        "Activewear & Textured Knits"
-      ];
+      "Two-Tone Cross-Dye Weaving",
+      "Melange Saree & Dress Materials",
+      "Fancy, Jacquard & Brocade Fabrics",
+      "Activewear & Textured Knits"
+    ];
 
   return (
     <AnimatePresence>
@@ -328,7 +328,7 @@ const ProductDetailModal = ({ product, isOpen, onClose, isFavorite, onToggleFavo
               >
                 {/* SVG WhatsApp Logo */}
                 <svg className="modal-wa-icon" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.58 1.961.92 3.031.92h.005c3.181 0 5.767-2.586 5.768-5.766 0-1.541-.6-2.989-1.688-4.077-1.088-1.088-2.535-1.688-4.075-1.688zm3.364 8.232c-.144.405-.837.774-1.17.824-.312.045-.694.075-2.223-.559-1.954-.809-3.213-2.794-3.311-2.924-.097-.13-.79-1.049-.79-2.001 0-.952.498-1.42.676-1.614.177-.194.387-.243.516-.243.13 0 .259.002.372.007.12.006.279-.045.437.336.162.388.551 1.344.599 1.442.049.097.081.211.016.34-.065.13-.097.211-.194.324-.097.113-.205.253-.292.34-.097.097-.199.203-.086.398.113.195.503.829 1.08 1.342.744.662 1.371.867 1.566.964.195.097.308.081.422-.049.113-.13.486-.566.616-.76.13-.194.259-.162.437-.097.178.065 1.134.535 1.328.632.194.097.324.146.372.227.049.081.049.47-.095.875z"/>
+                  <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.58 1.961.92 3.031.92h.005c3.181 0 5.767-2.586 5.768-5.766 0-1.541-.6-2.989-1.688-4.077-1.088-1.088-2.535-1.688-4.075-1.688zm3.364 8.232c-.144.405-.837.774-1.17.824-.312.045-.694.075-2.223-.559-1.954-.809-3.213-2.794-3.311-2.924-.097-.13-.79-1.049-.79-2.001 0-.952.498-1.42.676-1.614.177-.194.387-.243.516-.243.13 0 .259.002.372.007.12.006.279-.045.437.336.162.388.551 1.344.599 1.442.049.097.081.211.016.34-.065.13-.097.211-.194.324-.097.113-.205.253-.292.34-.097.097-.199.203-.086.398.113.195.503.829 1.08 1.342.744.662 1.371.867 1.566.964.195.097.308.081.422-.049.113-.13.486-.566.616-.76.13-.194.259-.162.437-.097.178.065 1.134.535 1.328.632.194.097.324.146.372.227.049.081.049.47-.095.875z" />
                 </svg>
                 <span>Enquire on WhatsApp</span>
                 <ChevronRight size={17} className="modal-enquire-arrow" />

@@ -222,24 +222,24 @@ const Products = () => {
          ========================================= */}
       <section className="products-header-section">
         {/* Subtle background decorative wave */}
-        <svg 
-          className="prod-head-bg-curves" 
-          viewBox="0 0 1440 380" 
-          fill="none" 
+        <svg
+          className="prod-head-bg-curves"
+          viewBox="0 0 1440 380"
+          fill="none"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
         >
-          <path 
-            d="M-50,180 C320,60 550,280 880,120 C1180,0 1380,220 1550,100" 
-            stroke="rgba(99, 102, 241, 0.08)" 
-            strokeWidth="1.5" 
+          <path
+            d="M-50,180 C320,60 550,280 880,120 C1180,0 1380,220 1550,100"
+            stroke="rgba(99, 102, 241, 0.08)"
+            strokeWidth="1.5"
           />
         </svg>
 
         <div className="container products-header-container">
           <div className="products-header-grid">
             {/* Left Column: Heading & Story */}
-            <motion.div 
+            <motion.div
               className="prod-head-left"
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -262,7 +262,7 @@ const Products = () => {
             </motion.div>
 
             {/* Center Column: High-Res Yarn Bobbins with Glowing Aura Ring (Exact Image 2) */}
-            <motion.div 
+            <motion.div
               className="prod-head-center"
               initial={{ opacity: 0, scale: 0.92 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -271,16 +271,16 @@ const Products = () => {
               <div className="prod-head-image-wrap">
                 {/* Indigo Aura Glow Arc */}
                 <div className="prod-head-aura-ring" aria-hidden="true" />
-                <img 
-                  src="/images/products/Product-header.png" 
-                  alt="Premium Polyester Yarn Cones Spools" 
+                <img
+                  src="/images/products/Product-header.png"
+                  alt="Premium Polyester Yarn Cones Spools"
                   className="prod-head-image"
                 />
               </div>
             </motion.div>
 
             {/* Right Column: 3 Vertical Trust Badges */}
-            <motion.div 
+            <motion.div
               className="prod-head-right"
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}

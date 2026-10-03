@@ -184,27 +184,27 @@ const ProductHighlights = () => {
   return (
     <section className="section product-offerings-section" id="products-preview">
       {/* Background Decorative Yarn Curves SVG */}
-      <svg 
-        className="offerings-bg-curves" 
-        viewBox="0 0 1440 600" 
-        fill="none" 
+      <svg
+        className="offerings-bg-curves"
+        viewBox="0 0 1440 600"
+        fill="none"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <path 
-          d="M-50,220 C250,50 480,380 820,160 C1120,-30 1320,290 1520,120" 
-          stroke="rgba(99, 102, 241, 0.08)" 
-          strokeWidth="1.5" 
+        <path
+          d="M-50,220 C250,50 480,380 820,160 C1120,-30 1320,290 1520,120"
+          stroke="rgba(99, 102, 241, 0.08)"
+          strokeWidth="1.5"
         />
-        <path 
-          d="M-80,280 C220,110 450,440 790,220 C1090,30 1290,350 1490,180" 
-          stroke="rgba(99, 102, 241, 0.05)" 
-          strokeWidth="1.2" 
+        <path
+          d="M-80,280 C220,110 450,440 790,220 C1090,30 1290,350 1490,180"
+          stroke="rgba(99, 102, 241, 0.05)"
+          strokeWidth="1.2"
         />
-        <path 
-          d="M-30,480 C320,520 620,400 950,560 C1250,700 1400,450 1550,520" 
-          stroke="rgba(99, 102, 241, 0.07)" 
-          strokeWidth="1.5" 
+        <path
+          d="M-30,480 C320,520 620,400 950,560 C1250,700 1400,450 1550,520"
+          stroke="rgba(99, 102, 241, 0.07)"
+          strokeWidth="1.5"
         />
       </svg>
 
