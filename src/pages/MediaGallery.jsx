@@ -116,9 +116,7 @@ const MediaGallery = () => {
           >
             {/* Centered Eyebrow */}
             <div className="media-eyebrow-row">
-              <span className="media-eyebrow-line" />
               <span className="media-eyebrow-text">MEDIA RECORDS</span>
-              <span className="media-eyebrow-line" />
             </div>
 
             {/* Main Heading */}
