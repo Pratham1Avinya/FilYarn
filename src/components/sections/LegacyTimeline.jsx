@@ -69,9 +69,7 @@ const LegacyTimeline = ({ variant = 'default' }) => {
             transition={{ duration: 0.5 }}
             className="roadmap-eyebrow"
           >
-            <span className="roadmap-dash" />
             <span>OUR ROADMAP</span>
-            <span className="roadmap-dash" />
           </motion.div>
 
           <motion.h2

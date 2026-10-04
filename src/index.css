@@ -268,10 +268,24 @@ h1, h2, h3, h4, h5, h6 {
   padding: 14px 28px;
   font-size: 0.95rem;
   font-weight: 500;
-  border-radius: 4px;
+  border-radius: 9999px;
   cursor: pointer;
   transition: var(--transition-normal);
   letter-spacing: 0.02em;
+}
+
+/* Global Uniform Pill Radius for all website buttons */
+button:not([class*="circle"]):not([class*="close"]):not([class*="arrow"]):not([class*="icon"]):not([class*="dot"]):not([class*="pin"]),
+.btn,
+.btn-primary,
+.btn-secondary,
+.btn-outline,
+.cta-btn,
+.action-btn,
+a.btn,
+a.btn-primary,
+a.btn-secondary {
+  border-radius: 9999px;
 }
 
 .btn-primary {
