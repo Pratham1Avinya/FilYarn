@@ -43,7 +43,6 @@ const LeadershipSection = () => {
           <div className="leadership-left-col">
             {/* Eyebrow Label */}
             <div className="leadership-badge-row">
-              <span className="leadership-badge-dash" />
               <span className="leadership-badge-text">OUR LEADERSHIP</span>
             </div>
 
