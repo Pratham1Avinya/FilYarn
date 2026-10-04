@@ -320,9 +320,7 @@ I would like to request a quote.
            ========================================= */}
         <div className="contact-header-block">
           <div className="contact-eyebrow-row">
-            <span className="contact-eyebrow-line" />
             <span className="contact-eyebrow-text">CONNECT WITH US</span>
-            <span className="contact-eyebrow-line" />
           </div>
 
           <h1 className="contact-main-headline font-serif">
@@ -1347,8 +1345,8 @@ I would like to request a quote.
           color: #2563eb;
           background: #eff6ff;
           border: 1px solid rgba(37, 99, 235, 0.2);
-          padding: 6px 12px;
-          border-radius: 8px;
+          padding: 6px 14px;
+          border-radius: 9999px;
           cursor: pointer;
           transition: all 0.15s ease;
         }
@@ -1441,7 +1439,7 @@ I would like to request a quote.
           font-size: 0.98rem;
           font-weight: 700;
           padding: 15px 24px;
-          border-radius: 14px;
+          border-radius: 9999px;
           border: none;
           cursor: pointer;
           display: flex;
@@ -1803,7 +1801,7 @@ I would like to request a quote.
 
         .modal-action-btn {
           padding: 13px 20px;
-          border-radius: 12px;
+          border-radius: 9999px;
           font-size: 0.92rem;
           font-weight: 700;
           border: none;

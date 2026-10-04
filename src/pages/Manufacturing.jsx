@@ -115,9 +115,7 @@ const Manufacturing = () => {
                 }}
                 className="mfg-badge"
               >
-                <span className="mfg-badge-dash" />
                 <span>OUR MANUFACTURING</span>
-                <span className="mfg-badge-dash" />
               </motion.div>
 
               <motion.h1
@@ -259,9 +257,7 @@ const Manufacturing = () => {
             style={{ textAlign: 'center', marginBottom: '70px' }}
           >
             <div className="mfg-badge" style={{ justifyContent: 'center', marginBottom: '14px' }}>
-              <span className="mfg-badge-dash" />
               <span>MANUFACTURING PROCESS</span>
-              <span className="mfg-badge-dash" />
             </div>
 
             <h2 className="mfg-process-heading font-serif">

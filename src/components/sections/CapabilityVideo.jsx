@@ -99,11 +99,9 @@ const CapabilityVideo = () => {
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* Eyebrow with flanking dashes */}
+            {/* Eyebrow */}
             <div className="mfg-eyebrow">
-              <span className="mfg-dash" />
               <span>MANUFACTURING SCOPE</span>
-              <span className="mfg-dash" />
             </div>
 
             {/* Main Heading */}
@@ -235,9 +233,7 @@ const CapabilityVideo = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <span className="mfg-footer-dash" />
           <span className="mfg-footer-text">QUALITY • INNOVATION • RELIABILITY</span>
-          <span className="mfg-footer-dash" />
         </motion.div>
       </div>
 

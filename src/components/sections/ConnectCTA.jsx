@@ -22,10 +22,9 @@ const ConnectCTA = () => {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Eyebrow with centered underline */}
+          {/* Eyebrow */}
           <div className="connect-eyebrow-wrap">
             <span className="connect-eyebrow-text">START A CONVERSATION</span>
-            <div className="connect-eyebrow-line" />
           </div>
 
           {/* Main Editorial Heading */}
@@ -196,7 +195,7 @@ const ConnectCTA = () => {
           background: #5051F9;
           color: #ffffff;
           padding: 14px 32px;
-          border-radius: 10px;
+          border-radius: 9999px;
           font-size: 0.98rem;
           font-weight: 600;
           display: inline-flex;
@@ -228,7 +227,7 @@ const ConnectCTA = () => {
           color: #16a34a;
           border: 1.5px solid #22c55e;
           padding: 14px 30px;
-          border-radius: 10px;
+          border-radius: 9999px;
           font-size: 0.98rem;
           font-weight: 600;
           display: inline-flex;

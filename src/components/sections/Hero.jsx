@@ -1,9 +1,30 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Button from '../common/Button';
 
 const Hero = () => {
+  const videoRef = useRef(null);
+  const [isVideoReady, setIsVideoReady] = useState(false);
+
+  useEffect(() => {
+    // Attempt instant autoplay on mount or cache restore
+    if (videoRef.current) {
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => setIsVideoReady(true))
+          .catch(() => {
+            // Autoplay policy fallback: muted autoplay is standard
+            if (videoRef.current) {
+              videoRef.current.muted = true;
+              videoRef.current.play().then(() => setIsVideoReady(true)).catch(() => {});
+            }
+          });
+      }
+    }
+  }, []);
+
   return (
     <section
       className="hero-section"
@@ -21,17 +42,47 @@ const Hero = () => {
       }}
     >
       {/* 
+        INSTANT POSTER BACKDROP (0ms latency):
+        Paints the exact video frame immediately on page load/refresh so
+        there is ZERO black screen or flashing while the MP4 streams.
+      */}
+      <div
+        className="hero-video-poster-backdrop"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundImage: "url('/videos/Hero-Section/hero_poster.webp')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center 15%',
+          transform: 'scale(1.22)',
+          transformOrigin: 'top center',
+          pointerEvents: 'none',
+          zIndex: 0
+        }}
+        aria-hidden="true"
+      />
+
+      {/* 
         BACKGROUND VIDEO:
-        Direct, high-clarity video playback calibrated for the new yarn production video.
-        Framed (scale 1.22, top-center origin) to completely eliminate bottom edge stock numbers,
-        keeping the vibrant yellow yarn spools and high-tech spinning line in crisp focus.
-        Plays in an infinite loop without ending, muted & playsInline for guaranteed autoplay.
+        Direct, high-clarity video playback calibrated for yarn production.
+        Preloaded automatically with fallback poster and smooth cross-fade.
       */}
       <video
+        ref={videoRef}
         autoPlay
         loop
         muted
         playsInline
+        preload="auto"
+        poster="/videos/Hero-Section/hero_poster.webp"
+        onLoadedData={() => setIsVideoReady(true)}
+        onCanPlay={() => {
+          setIsVideoReady(true);
+          if (videoRef.current) videoRef.current.play().catch(() => {});
+        }}
         style={{
           position: 'absolute',
           top: 0,
@@ -43,7 +94,9 @@ const Hero = () => {
           transform: 'scale(1.22)',
           transformOrigin: 'top center',
           pointerEvents: 'none',
-          zIndex: 0
+          zIndex: 1,
+          opacity: isVideoReady ? 1 : 0.95,
+          transition: 'opacity 0.4s ease-out'
         }}
       >
         <source src="/videos/Hero-Section/HeroVideo.mp4" type="video/mp4" />

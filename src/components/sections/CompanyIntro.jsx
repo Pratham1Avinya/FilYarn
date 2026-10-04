@@ -89,7 +89,7 @@ const CompanyIntro = () => {
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* Eyebrow with delicate flanking lines - Slide in from left */}
+            {/* Eyebrow - Slide in from left */}
             <motion.div 
               className="who-eyebrow-wrap"
               initial={{ opacity: 0, x: -25 }}
@@ -97,9 +97,7 @@ const CompanyIntro = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
             >
-              <span className="who-eyebrow-line" />
               <span className="who-eyebrow-text">WHO WE ARE</span>
-              <span className="who-eyebrow-line" />
             </motion.div>
 
             {/* Main Editorial Heading - Fade in and slide up */}
