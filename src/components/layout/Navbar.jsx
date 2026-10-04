@@ -1,15 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { Menu, X, Phone, Sun, Moon, ArrowRight } from 'lucide-react';
+import { Menu, X, Phone, Sun, Moon, ArrowRight, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { companyConfig } from '../../data/config';
 import Button from '../common/Button';
 
-// Exact navigation items required
+// Exact navigation items with Dealer dropdown
 const navigationLinks = [
   { path: '/about', label: 'About Us' },
   { path: '/manufacturing', label: 'Manufacturing' },
   { path: '/products', label: 'Products' },
+  {
+    label: 'Dealer',
+    isDropdown: true,
+    children: [
+      { label: 'Dealer Network', path: '/dealer-network' },
+      { label: 'Dealership Inquiry', path: '/dealership-inquiry' }
+    ]
+  },
   { path: '/gallery', label: 'Media Gallery' },
   { path: '/contact', label: 'Contact Us' }
 ];
@@ -31,6 +39,9 @@ const WhatsAppIcon = ({ size = 16, color = '#25D366' }) => (
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isDealerOpen, setIsDealerOpen] = useState(false);
+  const [mobileDealerOpen, setMobileDealerOpen] = useState(false);
+  const dealerHoverTimeout = useRef(null);
   const { pathname } = useLocation();
 
   // Preserved Theme State & Toggle
@@ -65,7 +76,20 @@ const Navbar = () => {
   // Close mobile drawer on route change
   useEffect(() => {
     setIsOpen(false);
+    setIsDealerOpen(false);
   }, [pathname]);
+
+  // Hover handlers with debounce for smooth dropdown behavior
+  const handleDealerMouseEnter = () => {
+    if (dealerHoverTimeout.current) clearTimeout(dealerHoverTimeout.current);
+    setIsDealerOpen(true);
+  };
+
+  const handleDealerMouseLeave = () => {
+    dealerHoverTimeout.current = setTimeout(() => {
+      setIsDealerOpen(false);
+    }, 140);
+  };
 
   return (
     <>
@@ -96,23 +120,72 @@ const Navbar = () => {
           </Link>
 
           {/* 
-            Center: Desktop Navigation Links
-            Clear, readable, centered, with balanced padding and zero text overlapping.
+            Center: Desktop Navigation Links with Dealer Hover Dropdown
           */}
           <nav className="desktop-nav" aria-label="Main Navigation">
             <ul className="desktop-nav-list">
-              {navigationLinks.map((link) => (
-                <li key={link.path} className="desktop-nav-item">
-                  <NavLink
-                    to={link.path}
-                    className={({ isActive }) =>
-                      `nav-link-item ${isActive ? 'active-nav-link' : ''}`
-                    }
-                  >
-                    {link.label}
-                  </NavLink>
-                </li>
-              ))}
+              {navigationLinks.map((link) => {
+                if (link.isDropdown) {
+                  return (
+                    <li
+                      key={link.label}
+                      className="desktop-nav-item nav-dropdown-wrapper"
+                      onMouseEnter={handleDealerMouseEnter}
+                      onMouseLeave={handleDealerMouseLeave}
+                    >
+                      <button
+                        type="button"
+                        className={`nav-link-item nav-dropdown-trigger ${isDealerOpen ? 'active-dropdown' : ''}`}
+                        aria-expanded={isDealerOpen}
+                        aria-haspopup="true"
+                      >
+                        <span>{link.label}</span>
+                      </button>
+
+                      {/* Submenu Dropdown Card */}
+                      <AnimatePresence>
+                        {isDealerOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 6, scale: 0.96 }}
+                            transition={{ duration: 0.16, ease: 'easeOut' }}
+                            className="nav-hover-dropdown-card"
+                            onMouseEnter={handleDealerMouseEnter}
+                            onMouseLeave={handleDealerMouseLeave}
+                          >
+                            <div className="nav-dropdown-inner">
+                              {link.children.map((subItem) => (
+                                <Link
+                                  key={subItem.label}
+                                  to={subItem.path}
+                                  onClick={() => setIsDealerOpen(false)}
+                                  className="nav-submenu-link"
+                                >
+                                  <span className="submenu-link-text">{subItem.label}</span>
+                                </Link>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </li>
+                  );
+                }
+
+                return (
+                  <li key={link.path} className="desktop-nav-item">
+                    <NavLink
+                      to={link.path}
+                      className={({ isActive }) =>
+                        `nav-link-item ${isActive ? 'active-nav-link' : ''}`
+                      }
+                    >
+                      {link.label}
+                    </NavLink>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
 
@@ -208,24 +281,72 @@ const Navbar = () => {
             className={`mobile-drawer-glass ${isScrolled ? 'scrolled-drawer' : 'top-drawer'}`}
           >
             <ul className="mobile-nav-list">
-              {navigationLinks.map((link, idx) => (
-                <motion.li
-                  key={link.path}
-                  initial={{ opacity: 0, x: -12 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.04 }}
-                >
-                  <NavLink
-                    to={link.path}
-                    onClick={() => setIsOpen(false)}
-                    className={({ isActive }) =>
-                      `mobile-nav-item-link ${isActive ? 'active' : ''}`
-                    }
+              {navigationLinks.map((link, idx) => {
+                if (link.isDropdown) {
+                  return (
+                    <motion.li
+                      key={link.label}
+                      initial={{ opacity: 0, x: -12 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: idx * 0.04 }}
+                      className="mobile-dropdown-item-wrap"
+                    >
+                      <button
+                        type="button"
+                        className="mobile-nav-item-link mobile-dropdown-toggle"
+                        onClick={() => setMobileDealerOpen(!mobileDealerOpen)}
+                      >
+                        <span>{link.label}</span>
+                        <ChevronDown
+                          size={16}
+                          className={`mobile-chevron ${mobileDealerOpen ? 'rotate-180' : ''}`}
+                        />
+                      </button>
+                      <AnimatePresence>
+                        {mobileDealerOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="mobile-submenu-container"
+                          >
+                            {link.children.map((subItem) => (
+                              <Link
+                                key={subItem.label}
+                                to={subItem.path}
+                                onClick={() => setIsOpen(false)}
+                                className="mobile-submenu-link"
+                              >
+                                {subItem.label}
+                              </Link>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </motion.li>
+                  );
+                }
+
+                return (
+                  <motion.li
+                    key={link.path}
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.04 }}
                   >
-                    {link.label}
-                  </NavLink>
-                </motion.li>
-              ))}
+                    <NavLink
+                      to={link.path}
+                      onClick={() => setIsOpen(false)}
+                      className={({ isActive }) =>
+                        `mobile-nav-item-link ${isActive ? 'active' : ''}`
+                      }
+                    >
+                      {link.label}
+                    </NavLink>
+                  </motion.li>
+                );
+              })}
             </ul>
 
             <div className="mobile-drawer-footer">
@@ -540,6 +661,171 @@ const Navbar = () => {
         .nav-link-item.active-nav-link {
           color: var(--color-accent) !important;
           font-weight: 600;
+        }
+
+        /* --------------------------------------------------------
+           DEALER DROPDOWN & HOVER SUBMENU
+           -------------------------------------------------------- */
+        .nav-dropdown-wrapper {
+          position: relative;
+        }
+
+        .nav-dropdown-trigger {
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          font-family: inherit;
+          font-size: 0.88rem;
+          font-weight: 500;
+          color: var(--text-secondary);
+          display: inline-flex;
+          align-items: center;
+          gap: 3px;
+          padding: 8px 6px;
+          outline: none;
+          transition: color 0.25s ease, padding 0.45s ease, font-size 0.45s ease;
+        }
+
+        .scrolled .nav-dropdown-trigger {
+          font-size: 0.83rem;
+          padding: 6px 4px;
+        }
+
+        .nav-dropdown-trigger:hover,
+        .nav-dropdown-trigger.active-dropdown {
+          color: var(--color-accent) !important;
+        }
+
+        .nav-dropdown-trigger::after {
+          content: '';
+          position: absolute;
+          bottom: 0px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 0;
+          height: 2px;
+          background: linear-gradient(90deg, #0284c7, var(--color-accent));
+          border-radius: 2px;
+          box-shadow: 0 0 8px rgba(99, 102, 241, 0.6);
+          transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-dropdown-wrapper:hover .nav-dropdown-trigger::after,
+        .nav-dropdown-trigger.active-dropdown::after {
+          width: 80%;
+        }
+
+        /* Floating Submenu Dropdown Card */
+        .nav-hover-dropdown-card {
+          position: absolute;
+          top: calc(100% + 10px);
+          left: 50%;
+          transform: translateX(-50%);
+          min-width: 195px;
+          background: rgba(255, 255, 255, 0.98);
+          border: 1px solid rgba(226, 232, 240, 0.9);
+          border-radius: 14px;
+          padding: 6px;
+          box-shadow: 0 16px 36px -4px rgba(15, 23, 42, 0.12), 0 4px 14px rgba(99, 102, 241, 0.08);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          z-index: 1000;
+        }
+
+        /* Invisible hover bridge to prevent hover flicker */
+        .nav-hover-dropdown-card::before {
+          content: '';
+          position: absolute;
+          top: -14px;
+          left: 0;
+          right: 0;
+          height: 14px;
+        }
+
+        [data-theme="dark"] .nav-hover-dropdown-card {
+          background: rgba(14, 19, 28, 0.98);
+          border-color: rgba(255, 255, 255, 0.1);
+          box-shadow: 0 18px 40px -4px rgba(0, 0, 0, 0.65), 0 2px 10px rgba(99, 102, 241, 0.2);
+        }
+
+        .nav-dropdown-inner {
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
+        }
+
+        .nav-submenu-link {
+          display: block;
+          padding: 9px 14px;
+          border-radius: 9px;
+          font-size: 0.86rem;
+          font-weight: 500;
+          color: var(--text-primary);
+          text-decoration: none;
+          white-space: nowrap;
+          transition: all 0.15s ease;
+          text-align: left;
+        }
+
+        .nav-submenu-link:hover {
+          background: #eff6ff;
+          color: #2563eb;
+        }
+
+        [data-theme="dark"] .nav-submenu-link:hover {
+          background: rgba(37, 99, 235, 0.18);
+          color: #60a5fa;
+        }
+
+        /* Mobile Dropdown Items */
+        .mobile-dropdown-item-wrap {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .mobile-dropdown-toggle {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          font-family: inherit;
+          text-align: left;
+        }
+
+        .mobile-chevron {
+          transition: transform 0.2s ease;
+          color: var(--text-secondary);
+        }
+
+        .mobile-chevron.rotate-180 {
+          transform: rotate(180deg);
+        }
+
+        .mobile-submenu-container {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          padding-left: 14px;
+          margin-top: 4px;
+          border-left: 2px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .mobile-submenu-link {
+          padding: 8px 12px;
+          border-radius: 8px;
+          font-size: 0.88rem;
+          font-weight: 500;
+          color: var(--text-secondary);
+          text-decoration: none;
+          transition: all 0.15s ease;
+        }
+
+        .mobile-submenu-link:hover {
+          color: var(--color-accent);
+          background: rgba(99, 102, 241, 0.08);
         }
 
         /* --------------------------------------------------------

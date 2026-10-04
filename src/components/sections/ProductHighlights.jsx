@@ -227,11 +227,9 @@ const ProductHighlights = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Flanked Eyebrow */}
+          {/* Eyebrow */}
           <div className="offerings-eyebrow-wrap">
-            <span className="offerings-eyebrow-line" />
             <span className="offerings-eyebrow-text">OUR OFFERINGS</span>
-            <span className="offerings-eyebrow-line" />
           </div>
 
           {/* Main Heading */}
