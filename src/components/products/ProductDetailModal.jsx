@@ -292,9 +292,9 @@ const ProductDetailModal = ({ product, isOpen, onClose, isFavorite, onToggleFavo
                 </div>
 
                 <div className="modal-spec-cell">
-                  <span className="modal-spec-cell-label">Standard Package</span>
+                  <span className="modal-spec-cell-label">Cone / Package Weight</span>
                   <span className="modal-spec-cell-val">
-                    {product.packageType || product.specs?.package || "Paper Cone (3.5kg – 4.5kg)"}
+                    {product.packageType || (product.coneWeight ? `Paper Cone (${product.coneWeight})` : null) || product.specs?.package || "Paper Cone (1.0 kg)"}
                   </span>
                 </div>
               </div>

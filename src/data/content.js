@@ -82,7 +82,7 @@ export const roadmapTimeline = [
   {
     year: "Today",
     title: "Serving Textile Customers",
-    desc: "Continuing to develop dependable yarn sourcing, manufacturing, and customer service capabilities. Integrated under active Pvt. Ltd. status in 2024."
+    desc: "Continuing to develop dependable yarn sourcing, manufacturing, and customer service capabilities. Integrated under active Pvt. Ltd. status in 2026."
   },
   {
     year: "Future",
@@ -94,10 +94,104 @@ export const roadmapTimeline = [
 export const mediaCategories = ["All", "Premises", "Activities", "Facility", "Events"];
 
 export const mediaGalleryItems = [
-  { id: 1, category: "Premises", title: "Registered Corporate Office", image: "/images/media-gallery/office-facade.jpg" },
-  { id: 2, category: "Facility", title: "Yarn Packaging Hub", image: "/images/media-gallery/warehouse.jpg" },
-  { id: 3, category: "Activities", title: "Yarn Quality Verification", image: "/images/media-gallery/quality-assurance.jpg" },
-  { id: 4, category: "Facility", title: "Spinning Frame Section", image: "/images/media-gallery/spinning-floor.jpg" },
-  { id: 5, category: "Events", title: "B2B Buyer Conference", image: "/images/media-gallery/buyer-meeting.jpg" },
-  { id: 6, category: "Activities", title: "Administrative Operations Desk", image: "/images/media-gallery/admin-operations.jpg" }
+  {
+    id: "premises",
+    category: "Premises",
+    title: "Company Premises",
+    subtitle: "Main Building View",
+    image: "/images/media-gallery/company-premises.jpg",
+    iconType: "building",
+    accent: "#3b82f6",
+    gridArea: "premises"
+  },
+  {
+    id: "office",
+    category: "Premises",
+    title: "Office Space",
+    subtitle: "Admin & Accounts Department",
+    image: "/images/media-gallery/office-space.jpg",
+    iconType: "desk",
+    accent: "#6366f1",
+    gridArea: "office"
+  },
+  {
+    id: "warehouse",
+    category: "Facility",
+    title: "Warehouse",
+    subtitle: "Raw Material Storage",
+    image: "/images/media-gallery/warehouse-storage.jpg",
+    iconType: "warehouse",
+    accent: "#3b82f6",
+    gridArea: "warehouse"
+  },
+  {
+    id: "production",
+    category: "Facility",
+    title: "Production",
+    subtitle: "Yarn Manufacturing",
+    image: "/images/media-gallery/production-machine.jpg",
+    iconType: "production",
+    accent: "#8b5cf6",
+    gridArea: "production"
+  },
+  {
+    id: "meeting",
+    category: "Activities",
+    title: "Meeting Room",
+    subtitle: "Discussion & Planning",
+    image: "/images/media-gallery/meeting-room.jpg",
+    iconType: "meeting",
+    accent: "#6366f1",
+    gridArea: "meeting"
+  },
+  {
+    id: "dispatch",
+    category: "Facility",
+    title: "Dispatch Area",
+    subtitle: "Finished Goods",
+    image: "/images/media-gallery/dispatch-area.jpg",
+    iconType: "box",
+    accent: "#3b82f6",
+    gridArea: "dispatch"
+  },
+  {
+    id: "events",
+    category: "Events",
+    title: "Company Events",
+    subtitle: "Celebration Moments",
+    image: "/images/media-gallery/company-events.jpg",
+    iconType: "calendar",
+    accent: "#3b82f6",
+    gridArea: "events"
+  },
+  {
+    id: "loading",
+    category: "Activities",
+    title: "Loading & Dispatch",
+    subtitle: "Logistics & Transport",
+    image: "/images/media-gallery/loading-dispatch.jpg",
+    iconType: "truck",
+    accent: "#3b82f6",
+    gridArea: "loading"
+  },
+  {
+    id: "products",
+    category: "Facility",
+    title: "Our Products",
+    subtitle: "Yarn Collection",
+    image: "/images/media-gallery/our-products.jpg",
+    iconType: "image",
+    accent: "#3b82f6",
+    gridArea: "products"
+  },
+  {
+    id: "team",
+    category: "Activities",
+    title: "Our Team",
+    subtitle: "Workforce & People",
+    image: "/images/media-gallery/our-team.jpg",
+    iconType: "team",
+    accent: "#3b82f6",
+    gridArea: "team"
+  }
 ];

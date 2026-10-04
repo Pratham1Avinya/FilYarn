@@ -4,16 +4,17 @@ export const companyConfig = {
   tagline: "Quality Yarn. Reliable Supply. Built for Long-Term Partnerships.",
   description: "Filyarn Industries Pvt. Ltd. is a yarn trader and manufacturer based in Surat, Gujarat, supplying quality polyester yarn and sewing thread solutions for textile and garment businesses.",
   phone: "+91 9157135001",
+  email: "info@filyarnindustries.com",
   whatsapp: "+91 9157135001",
   whatsappUrl: "https://wa.me/919157135001?text=Hello%20Filyarn%20Industries%2C%20I%20would%20like%20to%20enquire%20about%20your%20yarn%20and%20sewing%20thread%20products.",
   address: {
-    line1: "PL NO. 48, BL NO.792, ANKUR GALI",
+    line1: "PL NO. 4B, BL NO.792, ANKUR GALI",
     line2: "KUDSAD, MANGROL",
     city: "SURAT-",
     state: "SURAT",
     country: "India",
     pincode: "394110",
-    full: "PL NO. 48, BL NO.792, ANKUR GALI, KUDSAD, MANGROL, SURAT-, SURAT, 394110, India"
+    full: "PL NO. 4B, BL NO.792, ANKUR GALI, KUDSAD, MANGROL, SURAT- , SURAT, 394110, India"
   },
   registration: {
     type: "Private Limited Company",
@@ -28,7 +29,7 @@ export const companyConfig = {
     directors: [
       { name: "Ghanshyambhai Babubhai Gajera", role: "Director" },
       { name: "Hiren Arvindbhai Kunjadiya", role: "Director" },
-      { name: "Additional Director", role: "Director (as per company records)" }
+      { name: "KishorBhai V. Gajera", role: "Director" }
     ],
     nicClassification: "Mining of iron ores",
     nicNote: "Official registration/NIC classification as recorded in registry records. Filyarn Industries Private Limited operations focus exclusively on yarn/textile B2B supply."
@@ -77,8 +78,12 @@ export const companyConfig = {
   },
   imagePaths: {
     logo: "/images/logo/filyarn_transparent_logo.png",
-    leadership: "/images/leadership/owner.jpg",
-    leadershipPoster: "/images/leadership/owner-video-poster.jpg",
+    leadership: "/images/leadership/GhanshyamBhai1.png",
+    leadershipPoster: "/images/leadership/story-video-poster.jpg",
+    partnerGhanshyambhai: "/images/leadership/GhanshyamBhai1.png",
+    partnerHiren: "/images/leadership/Hiren1.png",
+    partnerKishorbhai: "/images/leadership/KishorBhai1.png",
+    partner3: "/images/leadership/KishorBhai1.png",
     manufacturingPoster: "/images/manufacturing/manufacturing-process-poster.jpg"
   }
 };

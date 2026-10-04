@@ -8,14 +8,16 @@ const Hero = () => {
     <section
       className="hero-section"
       style={{
-        height: '100vh',
-        minHeight: '650px',
+        minHeight: '100vh',
         position: 'relative',
         display: 'flex',
-        alignItems: 'center',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
         overflow: 'hidden',
         backgroundColor: '#07090d',
-        paddingTop: 'clamp(85px, 11vh, 105px)' // balances space for top floating navbar
+        paddingTop: 'clamp(90px, 12vh, 120px)',
+        paddingBottom: '20px',
+        boxSizing: 'border-box'
       }}
     >
       {/* 
@@ -58,7 +60,11 @@ const Hero = () => {
           maxWidth: '100%',
           paddingLeft: '24px',
           paddingRight: '24px',
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
+          flex: '1',
+          display: 'flex',
+          alignItems: 'center',
+          marginBottom: '20px'
         }}
       >
         <div style={{ maxWidth: '760px', textAlign: 'left', marginLeft: 0, marginRight: 'auto' }}>
@@ -80,7 +86,7 @@ const Hero = () => {
             <motion.h1
               className="font-serif"
               style={{
-                fontSize: 'clamp(2.5rem, 5vw, 4.25rem)',
+                fontSize: 'clamp(2.4rem, 4.8vw, 4.15rem)',
                 fontWeight: '600',
                 lineHeight: 1.15,
                 marginBottom: '20px',
@@ -139,11 +145,11 @@ const Hero = () => {
                 visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
               }}
               style={{
-                fontSize: 'clamp(1rem, 2vw, 1.2rem)',
+                fontSize: 'clamp(1rem, 1.8vw, 1.15rem)',
                 color: '#ffffff',
                 maxWidth: '620px',
-                marginBottom: '32px',
-                lineHeight: 1.65,
+                marginBottom: '28px',
+                lineHeight: 1.6,
                 fontWeight: '500',
                 textAlign: 'left'
               }}
@@ -199,22 +205,21 @@ const Hero = () => {
 
       {/* 
         BOTTOM INFINITE MARQUEE:
-        Continuous right-to-left oversized outlined typography ticker.
-        Completely seamless, stutter-free GPU-accelerated animation without any gaps or pauses.
+        Continuous right-to-left outlined typography ticker.
+        Placed cleanly at the bottom without overlapping the CTA buttons or text.
       */}
       <div 
         className="hero-marquee" 
         aria-hidden="true"
         style={{
-          position: 'absolute',
-          bottom: '28px',
-          left: 0,
+          position: 'relative',
           width: '100%',
           overflow: 'hidden',
           pointerEvents: 'none',
           zIndex: 4,
           userSelect: 'none',
-          lineHeight: 1
+          lineHeight: 1,
+          marginTop: 'auto'
         }}
       >
         <div className="hero-marquee-track">
@@ -239,7 +244,7 @@ const Hero = () => {
           display: flex;
           width: max-content;
           will-change: transform;
-          animation: heroMarquee 48s linear infinite;
+          animation: heroMarquee 45s linear infinite;
         }
 
         .hero-marquee-group {
@@ -251,14 +256,14 @@ const Hero = () => {
           flex-shrink: 0;
           white-space: nowrap;
           font-family: 'Libre Franklin', 'Franklin Gothic Medium', sans-serif;
-          font-size: clamp(55px, 6.5vw, 100px);
+          font-size: clamp(38px, 4.5vw, 68px);
           font-weight: 700;
           line-height: 1;
           letter-spacing: -0.01em;
           color: transparent;
-          -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.75);
-          padding-right: clamp(40px, 5vw, 80px);
-          padding-bottom: 8px;
+          -webkit-text-stroke: 1px rgba(255, 255, 255, 0.45);
+          padding-right: clamp(30px, 4vw, 60px);
+          padding-bottom: 4px;
         }
 
         @keyframes heroMarquee {
@@ -275,14 +280,10 @@ const Hero = () => {
             padding-left: 16px !important;
             padding-right: 16px !important;
           }
-          .hero-marquee {
-            bottom: 18px !important;
-          }
           .hero-marquee-text {
-            font-size: clamp(38px, 9vw, 55px) !important;
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.7) !important;
-            padding-right: 32px !important;
-            padding-bottom: 4px !important;
+            font-size: clamp(28px, 7vw, 42px) !important;
+            -webkit-text-stroke: 0.8px rgba(255, 255, 255, 0.4) !important;
+            padding-right: 24px !important;
           }
         }
       `}</style>

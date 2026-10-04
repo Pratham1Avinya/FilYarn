@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useEffect } from 'react';
+import { motion } from 'framer-motion';
 import {
   Briefcase,
   ArrowUpRight,
@@ -14,7 +14,11 @@ import {
   User,
   CreditCard,
   TrendingUp,
-  ArrowRight
+  ArrowRight,
+  Lightbulb,
+  Leaf,
+  HeartHandshake,
+  Target
 } from 'lucide-react';
 import { companyConfig } from '../data/config';
 import { valuesData } from '../data/content';
@@ -22,8 +26,6 @@ import LegacyTimeline from '../components/sections/LegacyTimeline';
 import ConnectCTA from '../components/sections/ConnectCTA';
 
 const About = () => {
-  const [activePillar, setActivePillar] = useState('mission'); // 'mission' | 'vision' | 'values'
-
   useEffect(() => {
     document.title = "About Us | FILYARN INDUSTRIES PRIVATE LIMITED";
     const metaDescription = document.querySelector('meta[name="description"]');
@@ -39,35 +41,116 @@ const About = () => {
     { label: "Paid-up Capital", value: "₹15,00,000" }
   ];
 
-  const valuesList = [
-    { num: '01', title: 'Quality Excellence', desc: 'Upholding strict product quality benchmarks in every batch.' },
-    { num: '02', title: 'Customer Satisfaction', desc: 'Prioritizing client requirements with prompt, personalized service.' },
-    { num: '03', title: 'Integrity', desc: 'Maintaining transparency and honesty in all our B2B interactions.' },
-    { num: '04', title: 'Innovation', desc: 'Adopting modern techniques to improve manufacturing and processing.' },
-    { num: '05', title: 'Reliable Supply', desc: 'Ensuring consistent, on-time bulk deliveries across domestic markets.' },
-    { num: '06', title: 'Continuous Improvement', desc: 'Consistently refining our processes, skills, and logistics.' },
-    { num: '07', title: 'Responsible Business', desc: 'Operating with ecological responsibility and ethical employment standards.' }
+  const directorsList = [
+    {
+      name: "GhanshyamBhai B. Gajera",
+      role: "DIRECTOR",
+      image: "/images/leadership/GhanshyamBhai1.png",
+      accent: "#2563EB",
+      glow: "rgba(37, 99, 235, 0.12)"
+    },
+    {
+      name: "Hiren A. Kunjadiya",
+      role: "DIRECTOR",
+      image: "/images/leadership/Hiren1.png",
+      accent: "#0D9488",
+      glow: "rgba(13, 148, 136, 0.12)"
+    },
+    {
+      name: "KishorBhai V. Gajera",
+      role: "DIRECTOR",
+      image: "/images/leadership/KishorBhai1.png",
+      accent: "#8B5CF6",
+      glow: "rgba(139, 92, 246, 0.12)"
+    }
   ];
 
-  // Animation variants
-  const tabContentVariants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: 'easeOut' } },
-    exit: { opacity: 0, y: -15, transition: { duration: 0.2, ease: 'easeIn' } }
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.06 }
+  const principlesData = [
+    {
+      icon: <ShieldCheck size={20} strokeWidth={2.2} />,
+      iconBg: "#EFF6FF",
+      iconColor: "#2563EB",
+      title: "Quality First",
+      desc: "We are committed to consistent quality in every thread we produce.",
+      dashColor: "#2563EB"
+    },
+    {
+      icon: <Users size={20} strokeWidth={2.2} />,
+      iconBg: "#ECFDF5",
+      iconColor: "#10B981",
+      title: "Customer Focus",
+      desc: "We build lasting relationships through trust and service.",
+      dashColor: "#10B981"
+    },
+    {
+      icon: <Lightbulb size={20} strokeWidth={2.2} />,
+      iconBg: "#FAF5FF",
+      iconColor: "#A855F7",
+      title: "Innovation",
+      desc: "We embrace new ideas to create better solutions.",
+      dashColor: "#A855F7"
+    },
+    {
+      icon: <Leaf size={20} strokeWidth={2.2} />,
+      iconBg: "#F0FDFA",
+      iconColor: "#0D9488",
+      title: "Sustainability",
+      desc: "We work responsibly towards a greener and healthier tomorrow.",
+      dashColor: "#0D9488"
     }
-  };
+  ];
 
-  const staggerItem = {
-    hidden: { opacity: 0, y: 15 },
-    show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 200, damping: 20 } }
-  };
+  const companyReferences = [
+    {
+      id: "zaubacorp",
+      title: "Zauba Corp",
+      desc: "Review corporate financials, active status, board changes, share capital registrations, and incorporation metrics from the official registry.",
+      url: "https://www.zaubacorp.com/FILYARN-INDUSTRIES-PRIVATE-LIMITED-U13130GJ2024PTC154636",
+      logo: "/images/verification/zaubacorp.svg",
+      circleBg: "#EFF6FF",
+      topBorder: "#93C5FD",
+      accentColor: "#2563EB",
+      actionText: "View Company Data",
+      logoType: "standard"
+    },
+    {
+      id: "leikart",
+      title: "LeiKart Registry",
+      desc: "Legal Entity Identifier certificate verification.",
+      url: "https://www.leikart.com/leicert/335800XWMEZHC6TZV221/",
+      logo: "/images/verification/leikart.svg",
+      circleBg: "#ECFDF5",
+      topBorder: "#86EFAC",
+      accentColor: "#10B981",
+      actionText: "View Details",
+      logoType: "standard"
+    },
+    {
+      id: "magicpin",
+      title: "Magicpin",
+      desc: "Public business presence and local supply directory verification.",
+      url: "https://magicpin.in/Surat/Pipodara/Other/Filyarn-Industries-Pvt-Ltd/store/2236398?srsltid=AfmBOoq36wEIqSADixu_tMRWTrh1H2RLy21qfq2GE1wuKvzQLNcUha5R",
+      logo: "/images/verification/magicpin.png",
+      circleBg: "#FAF5FF",
+      topBorder: "#C4B5FD",
+      accentColor: "#9333EA",
+      actionText: "View Details",
+      logoType: "magicpin"
+    },
+    {
+      id: "tracxn",
+      title: "Tracxn",
+      desc: "Registry report containing legal profiles, funding status, and registry events.",
+      url: "https://tracxn.com/d/legal-entities/india/filyarn-industries-private-limited/__zaxDXdyLpqTyuHwIwcOWXpcEVAr04aMgDQ8GzldB7XY#about",
+      logo: "/images/verification/tracxn.svg",
+      circleBg: "#FFF7ED",
+      topBorder: "#FDBA74",
+      accentColor: "#EA580C",
+      actionText: "View Details",
+      logoType: "standard"
+    }
+  ];
+
 
   return (
     <div style={{ backgroundColor: 'var(--bg-primary)' }}>
@@ -340,224 +423,197 @@ const About = () => {
         </div>
       </section>
 
-      {/* Directors Board */}
-      <section className="section">
+      {/* Directors Board / Corporate Governance */}
+      <section className="leadership-custom-section">
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-            <span className="section-label">Corporate Governance</span>
-            <h2 className="section-title">
-              Board of <span>Directors</span>
+          <div style={{ textAlign: 'center' }}>
+            <div className="leadership-badge-wrap">
+              <span className="leadership-badge-dash" />
+              <span className="leadership-badge-text">OUR LEADERSHIP</span>
+              <span className="leadership-badge-dash" />
+            </div>
+            <h2 className="leadership-heading">
+              Board of <span className="leadership-heading-gradient">Directors</span>
             </h2>
-            <p className="section-desc" style={{ margin: '0 auto' }}>
+            <p className="leadership-subtext">
               Filyarn is led by experienced professionals directing operations, strategy, and partner relations.
             </p>
           </div>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '32px',
-            maxWidth: '960px',
-            margin: '0 auto'
-          }}>
-            {companyConfig.registration.directors.map((director, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="card"
-                style={{ textAlign: 'center', backgroundColor: 'var(--bg-secondary)' }}
-              >
-                <div style={{
-                  width: '80px',
-                  height: '80px',
-                  borderRadius: '50%',
-                  backgroundColor: 'var(--bg-tertiary)',
-                  border: '1px solid var(--border-light)',
-                  margin: '0 auto 16px auto',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'var(--color-accent)'
-                }}>
-                  <Briefcase size={32} />
-                </div>
-                <h3 style={{ fontSize: '1.2rem', fontWeight: '600', marginBottom: '4px' }}>{director.name}</h3>
-                <p style={{ fontSize: '0.85rem', color: 'var(--color-accent)' }}>{director.role}</p>
-              </motion.div>
-            ))}
+          <div className="leadership-cards-container">
+            {/* Left Dot Matrix Decoration */}
+            <div className="leadership-dots-left" aria-hidden="true" style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(5, 4px)',
+              gridTemplateRows: 'repeat(4, 4px)',
+              gap: '10px'
+            }}>
+              {[...Array(20)].map((_, i) => (
+                <span key={i} style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#CBD5E1', display: 'block' }} />
+              ))}
+            </div>
+
+            {/* Right Dot Matrix Decoration */}
+            <div className="leadership-dots-right" aria-hidden="true" style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(5, 4px)',
+              gridTemplateRows: 'repeat(4, 4px)',
+              gap: '10px'
+            }}>
+              {[...Array(20)].map((_, i) => (
+                <span key={i} style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#CBD5E1', display: 'block' }} />
+              ))}
+            </div>
+
+            <div className="leadership-cards-grid">
+              {directorsList.map((director, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.12 }}
+                  className="leadership-director-card"
+                >
+                  {/* Subtle soft ambient aura behind avatar */}
+                  <div style={{
+                    position: 'absolute',
+                    top: '25px',
+                    width: '180px',
+                    height: '180px',
+                    borderRadius: '50%',
+                    background: director.glow,
+                    filter: 'blur(24px)',
+                    zIndex: 0,
+                    pointerEvents: 'none'
+                  }} />
+
+                  <div
+                    className="leadership-avatar-wrap"
+                    style={{
+                      zIndex: 1,
+                      borderColor: director.accent,
+                      boxShadow: `0 0 0 5px var(--bg-primary), 0 8px 20px -4px rgba(15, 23, 42, 0.1), 0 0 16px ${director.glow}`
+                    }}
+                  >
+                    <img
+                      src={director.image}
+                      alt={director.name}
+                      className="leadership-avatar-img"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  <div className="leadership-name-pill" style={{ zIndex: 1 }}>
+                    {director.name}
+                  </div>
+
+                  <p className="leadership-role-text" style={{ zIndex: 1 }}>
+                    {director.role}
+                  </p>
+
+                  <div
+                    className="leadership-indicator-dash"
+                    style={{ backgroundColor: director.accent, zIndex: 1 }}
+                  />
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Foundational Pillars Section */}
-      <section className="section section-alt" style={{ borderTop: '1px solid var(--border-light)', borderBottom: '1px solid var(--border-light)' }}>
-        <div className="container" style={{ maxWidth: '960px' }}>
+      <section className="pillars-custom-section">
+        <div className="container" style={{ maxWidth: '1240px' }}>
+          <div className="pillars-main-grid">
+            {/* Left Column: Our Guiding Principles */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
+            >
+              <div>
+                <div className="pillars-badge-wrap">
+                  <span className="pillars-badge-dash" />
+                  <span className="pillars-badge-text">OUR VALUES</span>
+                </div>
+                <h2 className="pillars-title">
+                  Our <span className="pillars-title-gradient">Guiding Principles</span>
+                </h2>
+                <p className="pillars-desc">
+                  Our values guide how we work, serve customers, and build the future of the yarn and textile business.
+                </p>
 
-          {/* Section Header */}
-          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-            <span className="section-label" style={{ color: 'var(--color-logo-blue)' }}>Foundational Pillars</span>
-            <h2 className="section-title" style={{ marginBottom: '16px' }}>
-              Our Values: <span>Our Guiding Principles</span>
-            </h2>
-            <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', fontWeight: '300', margin: '0 auto', maxWidth: '700px' }}>
-              Our values guide how we work, serve customers, and build the future of the yarn and textile business.
-            </p>
-          </div>
-
-          {/* Interactive Panels/Tabs */}
-          <div style={{
-            display: 'flex',
-            backgroundColor: 'var(--bg-secondary)',
-            border: '1px solid var(--border-light)',
-            borderRadius: '8px',
-            padding: '6px',
-            marginBottom: '32px'
-          }} className="pillars-tabs-row">
-            {[
-              { id: 'mission', num: '01', label: 'Our Mission', icon: <Compass size={16} /> },
-              { id: 'vision', num: '02', label: 'Our Vision', icon: <Eye size={16} /> },
-              { id: 'values', num: '03', label: 'Core Values', icon: <Award size={16} /> }
-            ].map((tab) => {
-              const isActive = activePillar === tab.id;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActivePillar(tab.id)}
-                  style={{
-                    flex: '1',
-                    padding: '14px 20px',
-                    fontSize: '0.95rem',
-                    fontWeight: '600',
-                    borderRadius: '6px',
-                    border: 'none',
-                    backgroundColor: isActive ? 'var(--color-accent)' : 'transparent',
-                    color: isActive ? '#fff' : 'var(--text-secondary)',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '10px',
-                    transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)'
-                  }}
-                  className="pillar-tab"
-                >
-                  <span style={{ fontSize: '0.8rem', opacity: 0.6, fontWeight: '400' }}>{tab.num}</span>
-                  {tab.icon}
-                  {tab.label}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Tab Content Display Area */}
-          <div style={{
-            backgroundColor: 'var(--bg-secondary)',
-            border: '1px solid var(--border-light)',
-            borderRadius: 'var(--border-radius)',
-            padding: '40px',
-            minHeight: '260px',
-            boxShadow: '0 8px 30px rgba(0,0,0,0.06)'
-          }} className="pillars-content-box">
-            <AnimatePresence mode="wait">
-              {activePillar === 'mission' && (
-                <motion.div
-                  key="mission"
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  variants={tabContentVariants}
-                  style={{ display: 'flex', flexDirection: 'column', gap: '20px', justifyContent: 'center', height: '100%' }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <Compass size={28} style={{ color: 'var(--color-logo-blue)' }} />
-                    <h3 style={{ fontSize: '1.4rem', fontWeight: '600' }}>Our Corporate Mission</h3>
-                  </div>
-                  <p style={{
-                    fontSize: '1.2rem',
-                    color: 'var(--text-primary)',
-                    lineHeight: 1.8,
-                    fontWeight: '300',
-                    borderLeft: '4px solid var(--color-logo-blue)',
-                    paddingLeft: '24px'
-                  }}>
-                    {valuesData.mission}
-                  </p>
-                </motion.div>
-              )}
-
-              {activePillar === 'vision' && (
-                <motion.div
-                  key="vision"
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  variants={tabContentVariants}
-                  style={{ display: 'flex', flexDirection: 'column', gap: '20px', justifyContent: 'center', height: '100%' }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <Eye size={28} style={{ color: 'var(--color-logo-blue)' }} />
-                    <h3 style={{ fontSize: '1.4rem', fontWeight: '600' }}>Our Corporate Vision</h3>
-                  </div>
-                  <p style={{
-                    fontSize: '1.2rem',
-                    color: 'var(--text-primary)',
-                    lineHeight: 1.8,
-                    fontWeight: '300',
-                    borderLeft: '4px solid var(--color-logo-blue)',
-                    paddingLeft: '24px'
-                  }}>
-                    {valuesData.vision}
-                  </p>
-                </motion.div>
-              )}
-
-              {activePillar === 'values' && (
-                <motion.div
-                  key="values"
-                  initial="hidden"
-                  animate="show"
-                  exit="exit"
-                  variants={staggerContainer}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
-                    <Award size={28} style={{ color: 'var(--color-logo-blue)' }} />
-                    <h3 style={{ fontSize: '1.4rem', fontWeight: '600' }}>Our Core Values</h3>
-                  </div>
-
-                  <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
-                    gap: '20px'
-                  }}>
-                    {valuesList.map((val) => (
-                      <motion.div
-                        key={val.num}
-                        variants={staggerItem}
-                        style={{
-                          backgroundColor: 'var(--bg-tertiary)',
-                          border: '1px solid var(--border-light)',
-                          padding: '20px',
-                          borderRadius: '6px',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          gap: '10px'
-                        }}
+                {/* 4 Cards Grid */}
+                <div className="pillars-cards-grid">
+                  {principlesData.map((item, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: idx * 0.08 }}
+                      className="pillar-item-card"
+                    >
+                      <div
+                        className="pillar-icon-circle"
+                        style={{ backgroundColor: item.iconBg, color: item.iconColor }}
                       >
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <span style={{ fontSize: '0.8rem', color: 'var(--color-logo-blue)', fontWeight: '600' }}>{val.num}</span>
-                          <CheckCircle2 size={14} style={{ color: 'var(--color-accent)' }} />
-                        </div>
-                        <h4 style={{ fontSize: '1.05rem', fontWeight: '600', color: 'var(--text-primary)' }}>{val.title}</h4>
-                        <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5, fontWeight: '300' }}>{val.desc}</p>
-                      </motion.div>
-                    ))}
+                        {item.icon}
+                      </div>
+                      <h4 className="pillar-item-title">{item.title}</h4>
+                      <p className="pillar-item-desc">{item.desc}</p>
+                      <div
+                        className="pillar-item-dash"
+                        style={{ backgroundColor: item.dashColor }}
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tagline footer */}
+              <div className="pillars-footer-tagline">
+                <span className="tagline-line-left" />
+                <HeartHandshake size={19} className="tagline-icon" strokeWidth={2.2} />
+                <span className="tagline-text">
+                  Together we build trust, quality and long-term partnerships.
+                </span>
+                <span className="tagline-line-right" />
+              </div>
+            </motion.div>
+
+            {/* Right Column: Mission Card with about-misson-section.png */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="mission-card-wrap"
+            >
+              <div className="mission-card-inner">
+                <div className="mission-badge">
+                  <div className="mission-badge-icon">
+                    <Target size={18} strokeWidth={2.3} />
                   </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  <span className="mission-badge-text">OUR MISSION</span>
+                </div>
+
+                <h3 className="mission-headline">
+                  Building Trust<br />
+                  in <span className="mission-headline-gradient">Every Thread</span>
+                </h3>
+
+                <div className="mission-quote-container">
+                  <p className="mission-quote-paragraph">
+                    &ldquo;To provide quality yarn solutions at competitive prices while building long-term relationships with customers through dependable products, responsive service and reliable supply.&rdquo;
+                  </p>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -565,191 +621,81 @@ const About = () => {
       {/* Roadmap Component (Horizontal timeline Roadmap) */}
       <LegacyTimeline />
 
-      {/* Redesigned External Verification */}
-      <section className="section section-alt">
-        <div className="container" style={{ maxWidth: '960px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-            <span className="section-label" style={{ color: 'var(--color-logo-blue)' }}>External Verification</span>
-            <h2 className="section-title">
-              Company <span>References</span>
+      {/* Redesigned External Verification / Company References */}
+      <section className="verification-custom-section">
+        <div className="container" style={{ maxWidth: '1240px' }}>
+          <div className="verification-heading-wrap">
+            <span className="verification-badge">EXTERNAL VERIFICATION</span>
+            <h2 className="verification-title">
+              Company <span className="verification-title-gradient">References</span>
             </h2>
-            <p className="section-desc" style={{ margin: '0 auto', maxWidth: '600px' }}>
+            <p className="verification-subtitle">
               Review our active corporate standing and verified profiles across public business intelligence resources.
             </p>
           </div>
 
-          {/* Grid Layout: Left featured Zauba Corp card + Right 3 stacked cards */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1.2fr 1fr',
-            gap: '30px'
-          }} className="verification-layout-grid">
-
-            {/* Left Featured Card (Zauba Corp) - WRAPPED inside interactive block anchor */}
-            <a
-              href="https://www.zaubacorp.com/FILYARN-INDUSTRIES-PRIVATE-LIMITED-U13130GJ2024PTC154636"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}
-              className="ref-card-anchor"
-            >
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                style={{
-                  backgroundColor: 'var(--bg-secondary)',
-                  border: '1px solid var(--border-light)',
-                  borderRadius: 'var(--border-radius)',
-                  padding: '36px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.06)',
-                  height: '100%',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-                }}
-                className="featured-ref-card"
+          <div className="verification-cards-row">
+            {companyReferences.map((item, idx) => (
+              <a
+                key={item.id}
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ref-item-anchor"
               >
-                <div>
-                  <div style={{
-                    height: '40px',
-                    marginBottom: '24px',
-                    display: 'flex',
-                    alignItems: 'center'
-                  }}>
-                    <img
-                      src="/images/verification/zaubacorp.svg"
-                      alt="ZaubaCorp Logo"
-                      style={{ height: '36px', width: 'auto', objectFit: 'contain' }}
-                    />
-                  </div>
-                  <h3 style={{ fontSize: '1.4rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '12px', transition: 'color 0.25s' }} className="ref-card-title">
-                    Zauba Corp
-                  </h3>
-                  <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '30px', fontWeight: '300' }}>
-                    Review corporate financials, active status, board changes, share capital registrations, and incorporation metrics from the official registry.
-                  </p>
-                </div>
-
-                <span
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '10px',
-                    padding: '14px 28px',
-                    fontSize: '0.9rem',
-                    fontWeight: '600',
-                    borderRadius: '6px',
-                    backgroundColor: 'var(--color-accent)',
-                    color: '#fff',
-                    alignSelf: 'flex-start',
-                    transition: 'all 0.25s ease'
-                  }}
-                  className="ref-action-btn"
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  className="ref-item-card"
                 >
-                  View Company Data
-                  <ArrowUpRight size={16} />
-                </span>
-              </motion.div>
-            </a>
+                  <div
+                    className="ref-item-card-topbar"
+                    style={{ backgroundColor: item.topBorder }}
+                  />
 
-            {/* Right column: 3 smaller vertical cards */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              {[
-                {
-                  id: 'leikart',
-                  title: 'LeiKart Registry',
-                  logo: '/images/verification/leikart.svg',
-                  desc: 'Legal Entity Identifier certificate verification.',
-                  url: 'https://www.leikart.com/leicert/335800XWMEZHC6TZV221/'
-                },
-                {
-                  id: 'magicpin',
-                  title: 'Magicpin',
-                  logo: '/images/verification/magicpin.png',
-                  desc: 'Public business presence and local supply directory verification.',
-                  url: 'https://magicpin.in/Surat/Pipodara/Other/Filyarn-Industries-Pvt-Ltd/store/2236398?srsltid=AfmBOoq36wEIqSADixu_tMRWTrh1H2RLy21qfq2GE1wuKvzQLNcUha5R'
-                },
-                {
-                  id: 'tracxn',
-                  title: 'Tracxn',
-                  logo: '/images/verification/tracxn.svg',
-                  desc: 'Registry report containing legal profiles, funding status, and registry events.',
-                  url: 'https://tracxn.com/d/legal-entities/india/filyarn-industries-private-limited/__zaxDXdyLpqTyuHwIwcOWXpcEVAr04aMgDQ8GzldB7XY#about'
-                }
-              ].map((card, idx) => (
-                <a
-                  key={card.id}
-                  href={card.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}
-                  className="ref-card-anchor"
-                >
-                  <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: idx * 0.1 }}
-                    style={{
-                      backgroundColor: 'var(--bg-secondary)',
-                      border: '1px solid var(--border-light)',
-                      borderRadius: '8px',
-                      padding: '20px 24px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      boxShadow: '0 4px 15px rgba(0,0,0,0.04)',
-                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-                    }}
-                    className="small-ref-card"
-                  >
-                    <div style={{ flex: '1', marginRight: '16px' }}>
-                      <div style={{
-                        height: '32px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        marginBottom: '8px',
-                        backgroundColor: card.id === 'magicpin' ? 'var(--magicpin-logo-bg)' : 'transparent',
-                        padding: card.id === 'magicpin' ? '4px 10px' : '0',
-                        borderRadius: '4px',
-                        width: 'fit-content'
-                      }}>
-                        <img
-                          src={card.logo}
-                          alt={`${card.title} Logo`}
-                          style={{ height: '20px', width: 'auto', objectFit: 'contain' }}
-                        />
+                  <div>
+                    <div className="ref-card-main-content">
+                      <div
+                        className="ref-logo-circle"
+                        style={{ backgroundColor: item.circleBg }}
+                      >
+                        {item.logoType === 'magicpin' ? (
+                          <div className="ref-logo-magicpin-box">
+                            <img
+                              src={item.logo}
+                              alt={`${item.title} logo`}
+                              className="ref-logo-img"
+                              style={{ height: '14px' }}
+                            />
+                          </div>
+                        ) : (
+                          <img
+                            src={item.logo}
+                            alt={`${item.title} logo`}
+                            className="ref-logo-img"
+                            style={{ maxHeight: item.id === 'zaubacorp' ? '46px' : '34px' }}
+                          />
+                        )}
                       </div>
-                      <h4 style={{ fontSize: '1.05rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '4px', transition: 'color 0.25s' }} className="ref-card-title">{card.title}</h4>
-                      <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: '300', margin: 0 }}>{card.desc}</p>
+
+                      <div className="ref-text-content">
+                        <h3 className="ref-item-title">{item.title}</h3>
+                        <p className="ref-item-desc">{item.desc}</p>
+                      </div>
                     </div>
-                    <span
-                      style={{
-                        width: '40px',
-                        height: '40px',
-                        borderRadius: '50%',
-                        backgroundColor: 'var(--bg-tertiary)',
-                        border: '1px solid var(--border-light)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'var(--text-secondary)',
-                        flexShrink: 0,
-                        transition: 'all 0.25s ease'
-                      }}
-                      className="small-ref-circle-btn"
-                    >
-                      <ArrowUpRight size={18} />
-                    </span>
-                  </motion.div>
-                </a>
-              ))}
-            </div>
+                  </div>
+
+                  <span
+                    className="ref-item-action-link"
+                    style={{ color: item.accentColor }}
+                  >
+                    {item.actionText} <ArrowRight size={14} />
+                  </span>
+                </motion.div>
+              </a>
+            ))}
           </div>
         </div>
       </section>

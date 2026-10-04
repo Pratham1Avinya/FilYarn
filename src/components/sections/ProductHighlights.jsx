@@ -22,7 +22,7 @@ const featuredOfferings = [
     badgeType: "primary",
     image: "/images/products/yarn-110.jpg",
     specs: [
-      { label: "110 Denier", icon: Package },
+      { label: "1.0 kg Cone", icon: Package },
       { label: "AA Grade", icon: Award },
       { label: "Weave & Knit", icon: Grid }
     ],
@@ -35,7 +35,7 @@ const featuredOfferings = [
       denier: "110 Denier",
       type: "Polyester Air Textured Yarn",
       lustre: "Semi-Dull",
-      packageType: "Paper Cone (3.5kg - 4.5kg)",
+      packageType: "Paper Cone (1.0 kg)",
       shortDesc: "High-bulk, cotton-like feel polyester air-textured yarn engineered for premium apparel and home textiles.",
       longDesc: "110 Aty is manufactured using high-pressure air texturing to introduce micro-loops into continuous polyester filaments. This gives the yarn an organic, cotton-touch feel with high abrasion resistance, dimensional stability, and superior cover factor.",
       applications: [
@@ -61,7 +61,7 @@ const featuredOfferings = [
     badgeType: "soft",
     image: "/images/products/yarn-140.jpg",
     specs: [
-      { label: "140 Denier", icon: Package },
+      { label: "1.0 kg Cone", icon: Package },
       { label: "AA Grade", icon: Award },
       { label: "Weave & Knit", icon: Grid }
     ],
@@ -74,7 +74,7 @@ const featuredOfferings = [
       denier: "140 Denier",
       type: "Polyester Air Textured Yarn (ATY)",
       lustre: "Semi-Dull",
-      packageType: "Paper Cone (4.0kg - 5.0kg)",
+      packageType: "Paper Cone (1.0 kg)",
       shortDesc: "Durable 140 denier polyester yarn provides excellent strength and uniformity for industrial use.",
       longDesc: "140 Aty is engineered for medium fabric constructions requiring high tensile strength, durable weave structure, and consistent yarn texture for diverse textile applications.",
       applications: [
@@ -100,7 +100,7 @@ const featuredOfferings = [
     badgeType: "soft",
     image: "/images/products/yarn-160.jpg",
     specs: [
-      { label: "160 Denier", icon: Package },
+      { label: "1.0 kg Cone", icon: Package },
       { label: "AA Grade", icon: Award },
       { label: "Weave & Knit", icon: Grid }
     ],
@@ -113,7 +113,7 @@ const featuredOfferings = [
       denier: "160 Denier",
       type: "Medium-Heavy Air Textured Yarn",
       lustre: "Semi-Dull",
-      packageType: "Paper Cone (4.0kg - 5.0kg)",
+      packageType: "Paper Cone (1.0 kg)",
       shortDesc: "Robust 160 denier air textured yarn providing rich body, matte appearance, and high durability.",
       longDesc: "160 Aty is engineered for medium to heavier weight fabric constructions requiring structural substance, durable tensile properties, and natural yarn texture.",
       applications: [
@@ -139,7 +139,7 @@ const featuredOfferings = [
     badgeType: "soft",
     image: "/images/products/sewing-thread.jpg",
     specs: [
-      { label: "Multi Count", icon: Package },
+      { label: "1.0 kg Cone", icon: Package },
       { label: "High Strength", icon: ShieldCheck },
       { label: "Garment Use", icon: Scissors }
     ],

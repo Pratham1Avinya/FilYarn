@@ -589,16 +589,16 @@ const Products = () => {
                             <Layers size={17} />
                           </div>
                           <div className="card-title-text">
-                            <h3 className="card-product-name">{product.denier || product.name}</h3>
+                            <h3 className="card-product-name">{product.name}</h3>
                             <span className="card-product-sub">{product.category || "Polyester Yarn (ATY)"}</span>
                           </div>
                         </div>
 
-                        {/* Specs Row (3 Items with Icons in Clean Row) */}
+                        {/* Specs Row (3 Items with Icons in Clean Row including Cone Weight) */}
                         <div className="card-specs-row">
-                          <div className="card-spec-tag">
+                          <div className="card-spec-tag" title="Cone / Package Weight">
                             <Package size={13} className="card-spec-icon" />
-                            <span>{product.denier || "110 Denier"}</span>
+                            <span><strong>{product.coneWeight || "1.0 kg"}</strong> Cone</span>
                           </div>
                           <div className="card-spec-tag">
                             <Award size={13} className="card-spec-icon" />
@@ -1527,8 +1527,17 @@ const Products = () => {
           white-space: nowrap;
         }
 
+        .card-spec-tag strong {
+          color: #1e293b;
+          font-weight: 700;
+        }
+
         [data-theme="dark"] .card-spec-tag {
           color: #cbd5e1;
+        }
+
+        [data-theme="dark"] .card-spec-tag strong {
+          color: #f8fafc;
         }
 
         .card-spec-icon {

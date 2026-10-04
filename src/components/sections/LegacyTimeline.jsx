@@ -21,7 +21,7 @@ const roadmapTimeline = [
     step: "03",
     tag: "TODAY",
     title: "Serving Textile Customers",
-    desc: "Continuing to develop dependable yarn sourcing, manufacturing, and customer service capabilities. Integrated under active PVT. Ltd. status in 2024.",
+    desc: "Continuing to develop dependable yarn sourcing, manufacturing, and customer service capabilities. Integrated under active PVT. Ltd. status in 2026.",
     icon: User
   },
   {
