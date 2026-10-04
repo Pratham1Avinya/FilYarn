@@ -37,7 +37,7 @@ const SOCIAL_LINKS = [
     shadow: '0 4px 12px rgba(37, 211, 102, 0.35)',
     icon: (
       <svg viewBox="0 0 24 24" width="18" height="18" fill="white">
-        <path d="M12.004 2C6.51 2 2.014 6.5 2.014 12a9.97 9.97 0 0 0 1.524 5.29L2 22l4.897-1.28A9.92 9.92 0 0 0 12.004 22c5.495 0 9.992-4.5 9.992-10S17.499 2 12.004 2zm5.093 14.28c-.22.617-1.285 1.206-1.776 1.293-.446.08-1.03.149-2.984-.667a12.04 12.04 0 0 1-5.123-4.51c-.675-1.11-1.077-2.39-1.077-3.69 0-2.072 1.07-3.11 1.488-3.52.33-.326.68-.42.9-.42h.64c.2 0 .46.03.68.53.25.56.84 2.07.91 2.22.08.15.13.33.03.53-.1.2-.2.32-.36.5-.16.15-.34.4-.48.54-.16.15-.33.32-.14.65.37.62.82 1.21 1.34 1.74a7.87 7.87 0 0 0 2.28 1.41c.32.15.52.12.71-.1.19-.22.84-.98.98-1.32.14-.34.28-.28.49-.2.2.08 1.32.62 1.55.73.22.1.37.16.42.25.06.09.06.52-.16 1.137z" />
+        <path d="M12.004 2C6.51 2 2.014 6.5 2.014 12a9.97 9.97 0 0 0 1.524 5.29L2 22l4.897-1.28A9.92 9.92 0 0 0 12.004 22c5.495 0 9.992-4.5 9.992-10S17.499 2 12.004 2zm5.093 14.28c-.22.617-1.285 1.206-1.776 1.293-.446.08-1.03.149-2.984-.667a12.04 12.04 0 0 1-5.123-4.51c-.675-1.11-1.077-2.39-1.077-3.69 0-2.072 1.07-3.11 1.488-3.52.33-.326.68-.42.9-.42h.64c.2 0 .46.03.68.53.25.56.84 2.07.91 2.22.08.15.13.33.03.53-.1.2-.2.32-.36.5-.16.18-.34.4-.48.54-.16.15-.33.32-.14.65.37.62.82 1.21 1.34 1.74a7.87 7.87 0 0 0 2.28 1.41c.32.15.52.12.71-.1.19-.22.84-.98.98-1.32.14-.34.28-.28.49-.2.2.08 1.32.62 1.55.73.22.1.37.16.42.25.06.09.06.52-.16 1.137z" />
       </svg>
     )
   }
@@ -119,14 +119,17 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Column 3: Company */}
+            {/* Column 3: Quick Links (Updated matching our complete website navigation menu) */}
             <div className="footer-col-nav">
-              <h4 className="footer-col-heading">COMPANY</h4>
+              <h4 className="footer-col-heading">QUICK LINKS</h4>
               <div className="footer-heading-underline" />
               <ul className="footer-link-list">
                 {[
                   { label: 'About Us', path: '/about' },
                   { label: 'Manufacturing', path: '/manufacturing' },
+                  { label: 'Products', path: '/products' },
+                  { label: 'Dealer Network', path: '/dealer-network' },
+                  { label: 'Dealership Inquiry', path: '/dealership-inquiry' },
                   { label: 'Media Gallery', path: '/gallery' },
                   { label: 'Contact Us', path: '/contact' }
                 ].map((item) => (
@@ -206,25 +209,21 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom Bar: Copyright & Policy Links */}
+      {/* Bottom Bar: Copyright & Developer Credit */}
       <div className="footer-bottom-bar">
         <div className="container footer-bottom-inner">
           <p className="footer-copyright-text">
             &copy; 2026 FILYARN INDUSTRIES PRIVATE LIMITED. All Rights Reserved.
           </p>
-          <div className="footer-bottom-legal">
-            <Link to="/about" className="footer-legal-link">
-              Privacy Policy
-            </Link>
-            <span className="footer-legal-divider">|</span>
-            <Link to="/about" className="footer-legal-link">
-              Terms &amp; Conditions
-            </Link>
+          <div className="footer-bottom-dev">
+            <span className="footer-dev-text">
+              Developed by <strong className="footer-dev-name">Pratham Antala</strong>
+            </span>
           </div>
         </div>
       </div>
 
-      {/* Scoped Stylings strictly matching reference image */}
+      {/* Scoped Stylings */}
       <style>{`
         .filyarn-footer-root {
           background-color: var(--bg-primary);
@@ -379,7 +378,7 @@ const Footer = () => {
           margin: 0;
           display: flex;
           flex-direction: column;
-          gap: 14px;
+          gap: 12px;
         }
 
         .footer-nav-item {
@@ -551,26 +550,20 @@ const Footer = () => {
           letter-spacing: 0.01em;
         }
 
-        .footer-bottom-legal {
+        .footer-bottom-dev {
           display: flex;
           align-items: center;
-          gap: 12px;
         }
 
-        .footer-legal-link {
+        .footer-dev-text {
           font-size: 0.82rem;
           color: #94a3b8;
-          text-decoration: none;
-          transition: color 0.2s ease;
+          letter-spacing: 0.01em;
         }
 
-        .footer-legal-link:hover {
-          color: #ffffff !important;
-        }
-
-        .footer-legal-divider {
-          color: #475569;
-          font-size: 0.82rem;
+        .footer-dev-name {
+          color: #ffffff;
+          font-weight: 600;
         }
 
         /* Responsive Breakpoints */
@@ -595,7 +588,7 @@ const Footer = () => {
           .footer-bottom-inner {
             flex-direction: column !important;
             align-items: flex-start !important;
-            gap: 12px !important;
+            gap: 10px !important;
           }
         }
       `}</style>

@@ -138,7 +138,7 @@ const WhatsAppButton = ({
           padding: '14px 28px',
           backgroundColor: '#25D366',
           color: '#fff',
-          borderRadius: '4px',
+          borderRadius: '9999px',
           fontWeight: '600',
           fontSize: '0.95rem',
           boxShadow: '0 4px 12px rgba(37, 211, 102, 0.2)',
