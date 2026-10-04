@@ -6,6 +6,8 @@ import About from './pages/About';
 import Manufacturing from './pages/Manufacturing';
 import Products from './pages/Products';
 import MediaGallery from './pages/MediaGallery';
+import DealerNetwork from './pages/DealerNetwork';
+import DealershipInquiry from './pages/DealershipInquiry';
 import Contact from './pages/Contact';
 
 // Scroll Restoration helper component
@@ -29,6 +31,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/manufacturing" element={<Manufacturing />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/dealer-network" element={<DealerNetwork />} />
+          <Route path="/dealership-inquiry" element={<DealershipInquiry />} />
           <Route path="/gallery" element={<MediaGallery />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>

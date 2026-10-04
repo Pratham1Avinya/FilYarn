@@ -889,7 +889,7 @@ const ProductDetailModal = ({ product, isOpen, onClose, isFavorite, onToggleFavo
           color: #ffffff;
           font-weight: 600;
           font-size: 0.95rem;
-          border-radius: 12px;
+          border-radius: 9999px;
           text-decoration: none;
           box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
           transition: all 0.25s ease;

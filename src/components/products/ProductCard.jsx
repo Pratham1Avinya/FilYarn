@@ -218,7 +218,7 @@ const ProductCard = ({ product, onSelect, isFavorite, onToggleFavorite }) => {
               color: '#ffffff',
               fontWeight: '600',
               fontSize: '0.82rem',
-              borderRadius: '6px',
+              borderRadius: '9999px',
               boxShadow: '0 2px 8px rgba(37, 211, 102, 0.2)',
               transition: 'all 0.2s ease'
             }}
@@ -235,7 +235,7 @@ const ProductCard = ({ product, onSelect, isFavorite, onToggleFavorite }) => {
             style={{
               width: '38px',
               height: '38px',
-              borderRadius: '6px',
+              borderRadius: '50%',
               border: '1px solid var(--border-light)',
               backgroundColor: 'var(--bg-primary)',
               color: 'var(--text-primary)',

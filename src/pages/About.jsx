@@ -172,7 +172,6 @@ const About = () => {
               {/* Eyebrow */}
               <div className="about-hero-eyebrow">
                 <span>OUR STORY</span>
-                <span className="about-eyebrow-dash" />
               </div>
 
               {/* Main Heading */}
@@ -265,7 +264,6 @@ const About = () => {
               className="overview-left"
             >
               <div className="overview-eyebrow">
-                <span className="overview-dash" />
                 <span>COMPANY OVERVIEW</span>
               </div>
 
@@ -428,9 +426,7 @@ const About = () => {
         <div className="container">
           <div style={{ textAlign: 'center' }}>
             <div className="leadership-badge-wrap">
-              <span className="leadership-badge-dash" />
               <span className="leadership-badge-text">OUR LEADERSHIP</span>
-              <span className="leadership-badge-dash" />
             </div>
             <h2 className="leadership-heading">
               Board of <span className="leadership-heading-gradient">Directors</span>
@@ -537,7 +533,6 @@ const About = () => {
             >
               <div>
                 <div className="pillars-badge-wrap">
-                  <span className="pillars-badge-dash" />
                   <span className="pillars-badge-text">OUR VALUES</span>
                 </div>
                 <h2 className="pillars-title">

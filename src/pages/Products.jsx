@@ -246,9 +246,7 @@ const Products = () => {
               transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="prod-head-eyebrow-wrap">
-                <span className="prod-head-eyebrow-line" />
                 <span className="prod-head-eyebrow-text">OUR PRODUCTS</span>
-                <span className="prod-head-eyebrow-line" />
               </div>
 
               <h1 className="prod-head-title">
@@ -1072,7 +1070,7 @@ const Products = () => {
           justify-content: center;
           gap: 6px;
           padding: 8px;
-          border-radius: 8px;
+          border-radius: 9999px;
           background: #f1f5f9;
           border: 1px solid rgba(226, 232, 240, 0.8);
           color: #475569;
@@ -1146,8 +1144,8 @@ const Products = () => {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          padding: 7px 14px;
-          border-radius: 10px;
+          padding: 7px 16px;
+          border-radius: 9999px;
           border: 1.5px solid rgba(226, 232, 240, 0.9);
           background: #ffffff;
           color: #1e293b;
@@ -1654,8 +1652,8 @@ const Products = () => {
 
         .no-results-clear-btn {
           margin-top: 10px;
-          padding: 8px 18px;
-          border-radius: 8px;
+          padding: 8px 20px;
+          border-radius: 9999px;
           background: #4f46e5;
           color: #ffffff;
           border: none;
